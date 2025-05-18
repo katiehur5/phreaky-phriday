@@ -1,0 +1,66 @@
+.masonry-grid {
+    display: flex;
+    margin-left: -16px; /* gutter size offset */
+    width: auto;
+  }
+  
+  .masonry-grid_column {
+    padding-left: 16px; /* gutter size */
+    background-clip: padding-box;
+  }
+  
+  /* Card styles */
+  .masonry-card {
+    background: white;
+    border-radius: 16px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease;
+  }
+  
+  .masonry-card:hover {
+    transform: translateY(-4px);
+  }
+  
+  .masonry-img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+  }
+  
+  .masonry-info {
+    padding: 0.75rem;
+    font-family: 'Prata', serif;
+  }
+  
+  .status {
+    display: inline-block;
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+  }
+  
+  .status.available {
+    background: #d1f5d3;
+    color: #2e7d32;
+  }
+  
+  .status.sold {
+    background: #ffd4d4;
+    color: #b71c1c;
+  }
+
+  .delete-button {
+  background-color: #ffe5e5;
+  color: #cc0000;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.delete-button:hover {
+  background-color: #ffcccc;
+}

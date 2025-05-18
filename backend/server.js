@@ -6,6 +6,8 @@ const itemRoutes = require('./routes/items');
 const authRoutes = require('./routes/auth');
 require('dotenv').config();
 
+const path = require('path');
+
 const MONGO_URI = 'mongodb+srv://katiehur:Phreakyphriday22!@phreakyphriday.1hyfr.mongodb.net/?retryWrites=true&w=majority&appName=PhreakyPhriday';
 
 const app = express();
@@ -20,6 +22,9 @@ app.use('/api/items', itemRoutes);
 
 // Use the auth routes
 app.use('/api/auth', authRoutes);
+
+// serve files from /uploads
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,

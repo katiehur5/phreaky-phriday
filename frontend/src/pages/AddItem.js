@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import API from '../api';
 import { useNavigate } from 'react-router-dom';
 import '../styles/AddItem.css'; // Import styles
+import Navbar from '../components/Navbar';
 
 function AddItem() {
   const [formData, setFormData] = useState({
     name: '',
     description: '',
-    imageUrl: '',
   });
 
+  const [imageFile, setImageFile] = useState(null);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -17,23 +18,38 @@ function AddItem() {
     setFormData({ ...formData, [name]: value });
   };
 
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImageFile(file);
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const userId = localStorage.getItem('userId'); // Get logged-in user's ID
+    const token = localStorage.getItem('token'); // Get token for authentication
+
+    if (!userId || !token) {
+      alert('You must be logged in to add an item.');
+      navigate('/login');
+      return;
+    }
+
     try {
-      const userId = localStorage.getItem('userId'); // Get logged-in user's ID
-      const token = localStorage.getItem('token'); // Get token for authentication
+      const form = new FormData();
+      form.append('name', formData.name);
+      form.append('description', formData.description);
+      form.append('image', imageFile);
+      form.append('owner', userId);
 
-      if (!userId || !token) {
-        alert('You must be logged in to add an item.');
-        navigate('/login');
-        return;
-      }
-
-      const response = await API.post(
-        '/items',
-        { ...formData, owner: userId }, // Attach owner ID to item
-        { headers: { Authorization: `Bearer ${token}` } } // Send token for authentication
-      );
+      await API.post('/items', form, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      });
 
       alert('Item added successfully!');
       navigate('/items'); // Redirect to item listings
@@ -44,8 +60,11 @@ function AddItem() {
   };
 
   return (
+    <div className="additem-wrapper">
+      <Navbar />
+
     <div className="add-item-container">
-      <h1>Add a New Item</h1>
+      <h1>contribute to the closet!</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -63,15 +82,14 @@ function AddItem() {
           required
         />
         <input
-          type="text"
-          name="imageUrl"
-          placeholder="Image URL"
-          value={formData.imageUrl}
-          onChange={handleChange}
+          type="file"
+          accept="image/*"
+          onChange={handleImageUpload}
           required
         />
-        <button type="submit">Submit Item</button>
+        <button type="submit">upload to closet</button>
       </form>
+    </div>
     </div>
   );
 }

@@ -2,12 +2,39 @@
 const express = require('express');
 const router = express.Router();
 const Item = require('../models/Item'); // Import Item model
+const authenticate = require('../middleware/authenticate');
+
+const multer = require('multer');
+const path = require('path');
+
+const storage = multer.diskStorage({
+  destination: 'uploads/',
+  filename: (req, file, cb) => {
+    const ext = path.extname(file.originalname); // get .jpg, .png etc.
+    const uniqueName = Date.now() + '-' + Math.round(Math.random() * 1E9) + ext;
+    cb(null, uniqueName);
+  },
+});
+
+const upload = multer({ storage });
+
 
 // POST /api/items - Add a new item
-router.post('/', async (req, res) => {
+router.post('/', authenticate, upload.single('image'), async (req, res) => {
   try {
-    const { name, description, imageUrl, owner } = req.body;
-    const item = new Item({ name, description, imageUrl, owner });
+    console.log('BODY:', req.body);
+    console.log('FILE:', req.file);
+
+    const { name, description, owner } = req.body;
+    const imagePath = `uploads/${req.file.filename}`;
+
+    const item = new Item({ 
+      name,
+      description, 
+      imagePath, 
+      owner: req.user.id
+    });
+
     await item.save();
     res.status(201).json({ message: 'Item added successfully!', item });
   } catch (err) {
@@ -39,6 +66,24 @@ router.get('/:id', async (req, res) => {
   } catch (err) {
     console.error('Error retrieving item:', err);
     res.status(500).json({ error: 'Error retrieving item' });
+  }
+});
+
+// DELETE /api/items/:id - delete item by ID
+router.delete('/:id', authenticate, async (req,res) => {
+  console.log("req.user:", req.user);
+  try {
+    const deletedItem = await Item.findByIdAndDelete(req.params.id);
+    if (!deletedItem) {
+      return res.status(404).json({ message: 'Item not found' });
+    }
+    if (deletedItem.owner.toString() !== req.user.id) {
+      return res.status(403).json({ message: 'Not authorized to delete this item' });
+    }
+    res.status(200).json({ message: 'Item removed successfully' });
+  } catch (err) {
+    console.error('Error deleting item:', err);
+    res.status(500).json({ error: 'Error deleting item' });
   }
 });
 

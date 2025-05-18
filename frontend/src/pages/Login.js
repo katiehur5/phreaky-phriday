@@ -22,7 +22,7 @@ function Login() {
       localStorage.setItem('userId', response.data.user._id);
 
       alert('Login successful!');
-      navigate('/'); // Redirect to homepage after login
+      navigate('/home'); // Redirect to homepage after login
     } catch (error) {
       console.error('Login failed:', error);
       alert('Invalid credentials. Please try again.');
@@ -37,6 +37,7 @@ function Login() {
           type="email"
           name="email"
           placeholder="Email"
+          autoComplete="off"
           value={formData.email}
           onChange={handleChange}
           required
@@ -45,6 +46,7 @@ function Login() {
           type="password"
           name="password"
           placeholder="Password"
+          autoComplete="new-password"
           value={formData.password}
           onChange={handleChange}
           required

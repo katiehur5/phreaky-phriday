@@ -33,3 +33,7 @@
     background: linear-gradient(135deg, #ff758c, #ff7eb3);
   }
   
+  .additem-wrapper {
+    min-height: 100vh;
+  }
+  
