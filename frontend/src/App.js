@@ -7,6 +7,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import PrivateRoute from './components/PrivateRoute';
 import AddItem from './pages/AddItem';
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/add-item" element={<PrivateRoute element={<AddItem />} />} />
-
+        <Route path="/profile/:userId" element={<Profile />} />
       </Routes>
     </Router>
   );

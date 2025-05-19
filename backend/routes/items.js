@@ -22,8 +22,8 @@ const upload = multer({ storage });
 // POST /api/items - Add a new item
 router.post('/', authenticate, upload.single('image'), async (req, res) => {
   try {
-    console.log('BODY:', req.body);
-    console.log('FILE:', req.file);
+    // console.log('BODY:', req.body);
+    // console.log('FILE:', req.file);
 
     const { name, description, owner } = req.body;
     const imagePath = `uploads/${req.file.filename}`;

@@ -4,6 +4,8 @@ import '../styles/Home.css';
 import Navbar from '../components/Navbar';
 
 const Home = () => {
+  const userId = localStorage.getItem('userId');
+
   return (
     <div className="home-wrapper">
         <Navbar />
@@ -15,7 +17,7 @@ const Home = () => {
 
       <div className="home-nav">
         <Link to="/items" className="home-link">browse items</Link>
-        <Link to="/profile" className="home-link">your profile</Link>
+        <Link to={`/profile/${userId}`} className="home-link">your profile</Link>
         {/* Add future sections here */}
         {/* <Link to="/calendar" className="home-link">Upcoming Events</Link> */}
         {/* <Link to="/community" className="home-link">Community Board</Link> */}
