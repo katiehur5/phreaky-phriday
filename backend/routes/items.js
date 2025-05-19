@@ -25,14 +25,22 @@ router.post('/', authenticate, upload.single('image'), async (req, res) => {
     // console.log('BODY:', req.body);
     // console.log('FILE:', req.file);
 
-    const { name, description, owner } = req.body;
+    const { name, description, owner, isAvailable, category, subcategory, condition, size, swapType, washInstructions, price } = req.body;
     const imagePath = `uploads/${req.file.filename}`;
 
     const item = new Item({ 
       name,
       description, 
       imagePath, 
-      owner: req.user.id
+      owner: req.user.id,
+      isAvailable,
+      category,
+      subcategory,
+      condition,
+      size,
+      swapType,
+      washInstructions,
+      price,
     });
 
     await item.save();
@@ -46,7 +54,7 @@ router.post('/', authenticate, upload.single('image'), async (req, res) => {
 // GET /api/items - Retrieve all items
 router.get('/', async (req, res) => {
   try {
-    const items = await Item.find().populate('owner', 'name email'); // Populate owner details
+    const items = await Item.find().populate('owner', 'name email phoneNumber'); // Populate owner details
     res.status(200).json(items);
   } catch (err) {
     console.error('Error retrieving items:', err);
@@ -58,7 +66,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const item = await Item.findById(id).populate('owner', 'name email');
+    const item = await Item.findById(id).populate('owner', 'name email phoneNumber');
     if (!item) {
       return res.status(404).json({ error: 'Item not found' });
     }

@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import PrivateRoute from './components/PrivateRoute';
 import AddItem from './pages/AddItem';
 import Profile from './pages/Profile';
+import ItemDetail from './pages/ItemDetail';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/add-item" element={<PrivateRoute element={<AddItem />} />} />
         <Route path="/profile/:userId" element={<Profile />} />
+        <Route path="/items/:id/" element={<ItemDetail />}/>
       </Routes>
     </Router>
   );

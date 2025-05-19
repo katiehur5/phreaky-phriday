@@ -28,6 +28,7 @@ function Register() {
     e.preventDefault();
     try {
       const response = await API.post('/users/register', formData);
+
       alert(response.data.message);
       navigate('/home');
     } catch (error) {
