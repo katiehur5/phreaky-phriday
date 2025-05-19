@@ -8,6 +8,11 @@ function AddItem() {
   const [formData, setFormData] = useState({
     name: '',
     description: '',
+    size: '',
+    condition: '',
+    swapType: '',
+    washInstructions: '',
+    price: '',
   });
 
   const [imageFile, setImageFile] = useState(null);
@@ -43,6 +48,22 @@ function AddItem() {
       form.append('description', formData.description);
       form.append('image', imageFile);
       form.append('owner', userId);
+      form.append('category', formData.category);
+      if (formData.subcategory) { form.append('subcategory', formData.subcategory); }
+      if (formData.condition) { form.append('condition', formData.condition); }
+      if (formData.size) { form.append('size', formData.size); }
+      if (formData.swapType) { form.append('swapType', formData.swapType); }
+      if (formData.washInstructions) { form.append('washInstructions', formData.washInstructions); }
+      if (formData.price) { form.append('price', formData.price); }
+
+      if (formData.swapType === 'borrow me') {
+        form.append('washInstructions', formData.washInstructions);
+      }
+
+      if (formData.swapType === 'buy me') {
+        form.append('price', formData.price);
+      }
+
 
       await API.post('/items', form, {
         headers: {
@@ -66,6 +87,15 @@ function AddItem() {
     <div className="add-item-container">
       <h1>contribute to the closet!</h1>
       <form onSubmit={handleSubmit}>
+        {/* FILE FIELD */}
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageUpload}
+          required
+        />
+
+        {/* NAME FIELD */}
         <input
           type="text"
           name="name"
@@ -74,19 +104,122 @@ function AddItem() {
           onChange={handleChange}
           required
         />
+
+        {/* CATEGORY FIELD */}
+        <div className="options">
+          <span className="label">CATEGORY:</span>
+          {['clothing', 'shoes', 'accessories', 'home goods', 'other'].map((c) => (
+            <label key={c} className="label">
+            <input
+              type="radio"
+              name="category"
+              value={c}
+              checked={formData.category === c}
+              onChange={handleChange}
+              // required
+            />
+              {c}
+            </label>
+          ))}
+        </div>
+
+        {/* CONDITIONAL SUBCATEGORY FIELDS */}
+        {formData.category === 'clothing' && (
+          <div className="options">
+            <span className="label">CLOTHING TYPE:</span>
+          {['dress', 'top', 'bottom', 'outerwear', 'other'].map((c) => (
+            <label key={c} className="label">
+            <input
+              type="radio"
+              name="subcategory"
+              value={c}
+              checked={formData.subcategory === c}
+              onChange={handleChange}
+              // required
+            />
+              {c}
+            </label>
+          ))}
+        </div>
+        )}
+
+        {/* size field (optional) */}
+        <input
+          type="text"
+          name="size"
+          placeholder="Size (optional)"
+          value={formData.size}
+          onChange={handleChange}
+        />
+
+        {/* DESCRIPTION FIELD */}
         <textarea
           name="description"
-          placeholder="Description"
+          placeholder="Description: brand, fit, color, material, etc."
           value={formData.description}
           onChange={handleChange}
-          required
+          // required
         />
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageUpload}
-          required
-        />
+
+        {/* CONDITION FIELD */}
+        <div className="options">
+          <span className="label">CONDITION:</span>
+          {['new', 'good', 'poor'].map((c) => (
+            <label key={c} className="label">
+            <input
+              type="radio"
+              name="condition"
+              value={c}
+              checked={formData.condition === c}
+              onChange={handleChange}
+              // required
+            />
+              {c}
+            </label>
+          ))}
+        </div>
+
+        {/* SWAP TYPE FIELD */}
+        <div className="options">
+          <span className="label">SWAP TYPE:</span>
+        {['buy me', 'take me', 'borrow me'].map((c) => (
+            <label key={c} className="label">
+            <input
+              type="radio"
+              name="swapType"
+              value={c}
+              checked={formData.swapType === c}
+              onChange={handleChange}
+              // required
+            />
+              {c}
+            </label>
+          ))}
+        </div>
+        {/* CONDITIONAL WASH / PRICE FIELDS */}
+        {formData.swapType === 'borrow me' && (
+          <input
+            type="text"
+            name="washInstructions"
+            placeholder="Wash Instructions"
+            value={formData.washInstructions}
+            onChange={handleChange}
+            // required
+          />
+        )}
+
+        {formData.swapType === 'buy me' && (
+          <input
+            type="number"
+            name="price"
+            placeholder="Selling Price ($)"
+            value={formData.price}
+            onChange={handleChange}
+            // required
+          />
+        )}
+
+        {/* SUBMIT BUTTON */}
         <button type="submit">upload to closet</button>
       </form>
     </div>

@@ -17,6 +17,7 @@ const Home = () => {
 
       <div className="home-nav">
         <Link to="/items" className="home-link">browse items</Link>
+        <Link to="/add-item" className="home-link">upload item</Link>
         <Link to={`/profile/${userId}`} className="home-link">your profile</Link>
         {/* Add future sections here */}
         {/* <Link to="/calendar" className="home-link">Upcoming Events</Link> */}

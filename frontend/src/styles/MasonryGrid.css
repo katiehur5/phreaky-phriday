@@ -64,3 +64,8 @@
 .delete-button:hover {
   background-color: #ffcccc;
 }
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

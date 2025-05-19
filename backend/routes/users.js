@@ -7,7 +7,7 @@ const Item = require('../models/Item');
 
 router.post('/register', async (req, res) => {
   try {
-    const { name, email, password, classYear } = req.body;
+    const { name, email, password, phoneNumber, classYear } = req.body;
     
     // enforce yale email
     const yaleEmailRegex = /^[a-zA-Z0-9._%+-]+@yale\.edu$/;
@@ -21,7 +21,14 @@ router.post('/register', async (req, res) => {
       return res.status(409).json({ message: "An account with this email already exists." });
     }
 
-    const user = new User({ name, email: email.toLowerCase(), password, classYear, items : [] });
+    const user = new User({ 
+      name, 
+      email: email.toLowerCase(), 
+      password, 
+      phoneNumber, 
+      classYear, 
+      items : [] 
+    });
     await user.save();
     res.status(201).json({ message: 'User registered successfully!', user });
   } catch (err) {
@@ -45,6 +52,7 @@ router.get('/:id', async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      phoneNumber: user.phoneNumber,
       classYear: user.classYear,
       items: items,
     });
