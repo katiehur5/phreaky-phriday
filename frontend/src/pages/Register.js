@@ -27,8 +27,10 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await API.post('/users/register', formData);
+      const response = await API.post('/auth/register', formData);
 
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('userId', response.data.user._id);
       alert(response.data.message);
       navigate('/home');
     } catch (error) {

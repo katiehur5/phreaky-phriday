@@ -14,17 +14,33 @@ const generateToken = (user) => {
 router.post('/register', async (req, res) => {
   try {
     const { name, phoneNumber, email, password, classYear } = req.body;
-    const existingUser = await User.findOne({ email });
 
+    // Enforce Yale email
+    const yaleEmailRegex = /^[a-zA-Z0-9._%+-]+@yale\.edu$/;
+    if (!yaleEmailRegex.test(email)) {
+      return res.status(400).json({ error: 'Email must be a Yale address.' });
+    }
+
+    // check for existing user
+    const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ error: 'Email already registered' });
     }
 
-    const newUser = new User({ name, phoneNumber, email, password, classYear });
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = new User({ 
+      name, 
+      phoneNumber, 
+      email, 
+      password: hashedPassword, 
+      classYear });
     await newUser.save();
 
     const token = generateToken(newUser);
-    res.status(201).json({ message: 'User registered successfully!', user: newUser, token });
+    res.status(201).json({ message: 'User registered successfully!', 
+      user: newUser, token });
   } catch (err) {
     console.error('Error registering user:', err);
     res.status(500).json({ error: 'Error registering user', details: err.message});

@@ -13,7 +13,6 @@ const Home = () => {
     <div className="home-container">
       <h1 className="home-title">welcome to phreaky phriday</h1>
       <p className="home-subtitle">gimme dat.</p>
-      <p className="home-subtitle">brought to you by YALE ALPHA PHI SORORITY</p>
 
       <div className="home-nav">
         <Link to="/items" className="home-link">browse items</Link>

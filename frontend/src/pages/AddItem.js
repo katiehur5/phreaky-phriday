@@ -53,15 +53,13 @@ function AddItem() {
       if (formData.condition) { form.append('condition', formData.condition); }
       if (formData.size) { form.append('size', formData.size); }
       if (formData.swapType) { form.append('swapType', formData.swapType); }
-      if (formData.washInstructions) { form.append('washInstructions', formData.washInstructions); }
-      if (formData.price) { form.append('price', formData.price); }
 
       if (formData.swapType === 'borrow me') {
-        form.append('washInstructions', formData.washInstructions);
+        if (formData.washInstructions) { form.append('washInstructions', formData.washInstructions); }
       }
 
       if (formData.swapType === 'buy me') {
-        form.append('price', formData.price);
+        if (formData.price) { form.append('price', formData.price); }
       }
 
 
