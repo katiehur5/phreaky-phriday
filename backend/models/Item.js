@@ -6,7 +6,12 @@ const ItemSchema = new mongoose.Schema({
   imagePath: { type: String },
   owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, // The user who owns this item
   isAvailable: { type: Boolean, default: true },
-  category: { type: String, enum: ['clothing', 'shoes', 'accessories', 'home goods', 'other'] },
+  category: { 
+    type: String, 
+    enum: ['clothing', 'shoes', 'accessories', 'home goods', 'other'],
+    required: false,
+    default: undefined, 
+  },
   subcategory: {
     type: String, 
     enum: ['dress', 'top', 'bottom', 'outerwear', 'other'],

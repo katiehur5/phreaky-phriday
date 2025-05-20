@@ -55,7 +55,10 @@ function ItemDetail() {
             </a>
           </p>
           <p><strong>Digits:</strong>{' '}
-            <a href={`tel:${item.owner.phoneNumber}`}>{item.owner.phoneNumber}</a>
+            <a href={`sms:${item.owner.phoneNumber}?body=${encodeURIComponent(
+              `hey ${item.owner.name}, is your item "${item.name}" still available?`
+            )}`}>
+              {item.owner.phoneNumber}</a>
           </p>
         </div>
       </div>

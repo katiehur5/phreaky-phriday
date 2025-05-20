@@ -22,14 +22,28 @@ function App() {
       </nav> */}
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/home" element={<Home />} />
-        {/* <Route path="/" element={<center><h1>p h r e a k y p h r i d a y</h1></center>} /> */}
-        <Route path="/items" element={<Items />}/>
+        <Route path="/home" element={
+          <PrivateRoute 
+            element={<Home />} />
+        } />
+        <Route path="/items" element={
+          <PrivateRoute 
+            element={<Items />} />
+        }/>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/add-item" element={<PrivateRoute element={<AddItem />} />} />
-        <Route path="/profile/:userId" element={<Profile />} />
-        <Route path="/items/:id/" element={<ItemDetail />}/>
+        <Route path="/add-item" element={
+          <PrivateRoute 
+            element={<AddItem />} />
+        } />
+        <Route path="/profile/:userId" element={
+          <PrivateRoute 
+            element={<Profile />} />
+        } />
+        <Route path="/items/:id/" element={
+          <PrivateRoute 
+            element={<ItemDetail />} />
+        }/>
       </Routes>
     </Router>
   );
