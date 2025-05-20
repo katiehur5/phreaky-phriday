@@ -52,7 +52,7 @@ router.post('/', authenticate, upload.single('image'), async (req, res) => {
 });
 
 // GET /api/items - Retrieve all items
-router.get('/', async (req, res) => {
+router.get('/', authenticate, async (req, res) => {
   try {
     const items = await Item.find().populate('owner', 'name email phoneNumber'); // Populate owner details
     res.status(200).json(items);
