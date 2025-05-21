@@ -50,12 +50,12 @@ function ItemDetail() {
           <hr />
           <p><strong>Owner:</strong> {item.owner?.name}</p>
           <p><strong>Email:</strong>{' '}
-            <a href={`mailto:${item.owner?.email}?subject=${encodeURIComponent(`Interested in ${item.name}`)}`}>
+            <a class="contact-link" href={`mailto:${item.owner?.email}?subject=${encodeURIComponent(`Interested in ${item.name}`)}`}>
                 {item.owner?.email}
             </a>
           </p>
           <p><strong>Digits:</strong>{' '}
-            <a href={`sms:${item.owner.phoneNumber}?body=${encodeURIComponent(
+            <a class="contact-link" href={`sms:${item.owner.phoneNumber}?body=${encodeURIComponent(
               `Hey ${item.owner.name}, is your item "${item.name}" still available?`
             )}`}>
               {item.owner.phoneNumber}</a>
