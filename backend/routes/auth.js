@@ -27,14 +27,11 @@ router.post('/register', async (req, res) => {
       return res.status(400).json({ error: 'Email already registered' });
     }
 
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
     const newUser = new User({ 
       name, 
       phoneNumber, 
       email, 
-      password: hashedPassword, 
+      password, 
       classYear });
     await newUser.save();
 
@@ -52,6 +49,14 @@ router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
+
+    console.log("Login attempt:", email);
+    console.log("User found:", user);
+    if (user) {
+      console.log("Stored hashed password:", user.password);
+      console.log("Password match?", await bcrypt.compare(password, user.password));
+    }
+
 
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(401).json({ error: 'Invalid credentials' });

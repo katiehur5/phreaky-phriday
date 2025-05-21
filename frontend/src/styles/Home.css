@@ -1,8 +1,13 @@
 .home-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  padding: 8rem;
-  background: linear-gradient(45deg, #c5f3e8, #FFF8E6);
-  min-height: 100vh;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 1rem;
 }
   
 .home-title {
@@ -42,7 +47,8 @@
 }
 
 .home-wrapper {
-  min-height: 100vh;
-  background: linear-gradient(to bottom right, #fdf6f0, #fcefee);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
   
