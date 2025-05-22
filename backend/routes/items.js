@@ -85,7 +85,12 @@ router.get('/', authenticate, async (req, res) => {
 
     const items = await Item.find(query)
       .populate('owner', 'name email phoneNumber')  // populate owner details
-      .sort({ likes: -1 }); // most liked appears first
+      .sort({ likes: -1 })
+      .lean();  // convert to plain JS objects
+
+    items.forEach(item => {
+      item.likedByCurrentUser = item.likes.some(like => like.toString() === req.user.id)
+    });
     res.status(200).json(items);
   } catch (err) {
     console.error('Error retrieving items:', err);

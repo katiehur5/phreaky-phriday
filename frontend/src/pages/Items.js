@@ -17,9 +17,8 @@ function Items() {
   const [likedItems, setLikedItems] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    async function fetchItems() {
-      try {
+  const fetchItems = async() => {
+    try {
         const params = new URLSearchParams();
         for (const key in filters) {
           filters[key].forEach(value => {
@@ -28,11 +27,15 @@ function Items() {
         }
         const response = await API.get(`/items?${params.toString()}`);
         setItems(response.data);
-
-      } catch (error) {
-        console.error('Error fetching items:', error);
-      }
+        setLikedItems(response.data
+          .filter(i => i.likedByCurrentUser)
+          .map(i => i._id));
+    } catch (error) {
+      console.error('Error fetching items:', error);
     }
+  }
+
+  useEffect(() => {
     fetchItems();
   }, [filters]);
 
@@ -68,20 +71,22 @@ function Items() {
       });
 
       // Toggle like state locally for quick UI update
-      setLikedItems(prev =>
-        prev.includes(id)
-          ? prev.filter(item => item !== id) // Unlike
-          : [...prev, id] // Like
-      );
+      // setLikedItems(prev =>
+      //   prev.includes(id)
+      //     ? prev.filter(item => item !== id) // Unlike
+      //     : [...prev, id] // Like
+      // );
 
-      // update like count in the item list
-      setItems(prevItems =>
-        prevItems.map(item =>
-          item._id === id
-            ? { ...item, likes: response.data.likes }
-            : item
-        )
-      );
+      // // update like count in the item list
+      // setItems(prevItems =>
+      //   prevItems.map(item =>
+      //     item._id === id
+      //       ? { ...item, likes: response.data.likes }
+      //       : item
+      //   )
+      // );
+
+      fetchItems();
     } catch (err) {
       console.error('Error liking item:', err);
     }
