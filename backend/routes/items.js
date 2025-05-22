@@ -22,8 +22,6 @@ const upload = multer({ storage });
 // POST /api/items - Add a new item
 router.post('/', authenticate, upload.single('image'), async (req, res) => {
   try {
-    // console.log('BODY:', req.body);
-    // console.log('FILE:', req.file);
 
     const { name, description, owner, isAvailable, category, subcategory, condition, size, swapType, washInstructions, price } = req.body;
     const imagePath = `uploads/${req.file.filename}`;
@@ -51,10 +49,43 @@ router.post('/', authenticate, upload.single('image'), async (req, res) => {
   }
 });
 
+// POST /api/items/:id/like - like an item
+router.post('/:id/like', authenticate, async (req, res) => {
+  const userId = req.user.id;
+  const item = await Item.findById(req.params.id);
+
+  if (!item) return res.status(404).json({ message: "Item not found" });
+
+  const index = item.likes.indexOf(userId);
+  if (index > -1) {
+    item.likes.splice(index, 1); // unlike
+  } else {
+    item.likes.push(userId); // like
+  }
+
+  await item.save();
+  res.status(200).json({ likes: item.likes.length });
+});
+
 // GET /api/items - Retrieve all items
 router.get('/', authenticate, async (req, res) => {
   try {
-    const items = await Item.find().populate('owner', 'name email phoneNumber'); // Populate owner details
+    const {
+      swapType,
+      category,
+      subcategory,
+      size
+    } = req.query;
+
+    const query = {};
+    if (req.query.swapType) query.swapType = { $in: [].concat(req.query.swapType) };
+    if (req.query.category) query.category = { $in: [].concat(req.query.category) };
+    if (req.query.subcategory) query.subcategory = { $in: [].concat(req.query.subcategory) };
+    if (req.query.size) query.size = { $in: [].concat(req.query.size) };
+
+    const items = await Item.find(query)
+      .populate('owner', 'name email phoneNumber')  // populate owner details
+      .sort({ likes: -1 }); // most liked appears first
     res.status(200).json(items);
   } catch (err) {
     console.error('Error retrieving items:', err);

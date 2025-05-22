@@ -39,14 +39,11 @@ router.post('/register', async (req, res) => {
 
 // GET /api/users/:id - Get user by ID and their items
 router.get('/:id', async (req, res) => {
-  // console.log("HIT /api/users/:id route");
   try {
     const user = await User.findById(req.params.id);
-    // console.log("USER ID:", user._id);
     if (!user) return res.status(404).json({ message: 'User not found' });
 
     const items = await Item.find({ owner: user._id });
-    // console.log("FOUND ITEMS:", items);
 
     res.status(200).json({
       _id: user._id,

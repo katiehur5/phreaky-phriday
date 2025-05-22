@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Navbar.css'; // Style separately or inline
+import '../styles/Navbar.css'; // Style separately or inline
 
 const Navbar = () => {
   const userId = localStorage.getItem('userId');
