@@ -84,3 +84,47 @@ button:hover {
   font-family: 'Inter', sans-serif
 }
 
+.upload-prompt {
+  display: inline-block;
+  padding: 0.75rem 1.25rem;
+  background: #f0e6f7; 
+  border: 2px dashed #c2a4d9;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #6b3f8c;
+  text-align: center;
+}
+.upload-prompt:hover {
+  background-color: #ebd8f4;
+}
+
+.file-badge {
+  background-color: white;
+  color: #5e3ea1;
+  padding: 12px 12px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  display: inline-block;
+  margin-top: 0rem;
+  animation: fadeIn 0.3s ease;
+  width: 50%;
+  box-sizing: border-box;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+.preview-img {
+  width: 50%;
+  border-radius: 12px;
+  margin-top: 10px;
+}
+
+.preview-add-img {
+  width: 30%;
+  border-radius: 12px;
+  margin-top: 10px;
+}

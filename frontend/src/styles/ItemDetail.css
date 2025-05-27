@@ -28,7 +28,9 @@
 }
 
 .item-detail-img {
-  width: 50%;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 12px;
   object-fit: cover;
   height: 100%;
   border-right: 1px solid #e3e3e3;
@@ -90,4 +92,32 @@
 .contact-link:focus {
   outline: 2px dashed #ccc;
   outline-offset: 2px;
+}
+
+.item-images {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  gap: 12px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.additional-imgs {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.sub-img {
+  width: 30%;
+  height: auto;
+  border-radius: 8px;
+  cursor: pointer;
+  object-fit: cover;
+  transition: transform 0.2s ease;
+}
+
+.sub-img:hover {
+  transform: scale(2.00);
 }

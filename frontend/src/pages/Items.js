@@ -100,7 +100,7 @@ function Items() {
       <>
       <FilterBar filters={filters} setFilters={setFilters} />
         {items.length === 0 ? (
-          <p>No items available.</p>
+          <p>Nothing here yet! o ~ o</p>
         ): (
           <MasonryGrid items={items} onDelete={handleDelete} onLike={handleLike} likedItems={likedItems}/>
         )}

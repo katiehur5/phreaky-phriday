@@ -16,6 +16,7 @@ function AddItem() {
   });
 
   const [imageFile, setImageFile] = useState(null);
+  const [additionalImageFiles, setAdditionalImageFiles] = useState([]);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -28,6 +29,17 @@ function AddItem() {
     if (file) {
       setImageFile(file);
     }
+  }
+
+  const handleAdditionalImagesUpload = (e) => {
+    const files = Array.from(e.target.files);
+
+    if (files.length > 3) {
+      alert('Only upload up to 3 additional images');
+      return;
+    }
+    
+    setAdditionalImageFiles(files);
   }
 
   const handleSubmit = async (e) => {
@@ -47,6 +59,9 @@ function AddItem() {
       form.append('name', formData.name);
       form.append('description', formData.description);
       form.append('image', imageFile);
+      for (const file of additionalImageFiles) {
+        form.append('additionalImages', file);
+      }
       form.append('owner', userId);
       form.append('category', formData.category);
       if (formData.subcategory) { form.append('subcategory', formData.subcategory); }
@@ -86,12 +101,57 @@ function AddItem() {
       <h1>contribute to the closet!</h1>
       <form onSubmit={handleSubmit}>
         {/* FILE FIELD */}
+        <label htmlFor="imageUpload" className="upload-prompt">
+          + Flick of your item
+        </label>
         <input
           type="file"
+          id="imageUpload"
+          name="image"
           accept="image/*"
           onChange={handleImageUpload}
+          style={{ display: 'none' }}
           required
         />
+        {imageFile && (
+          // <p className="file-badge">
+          //   ✅ <em>{imageFile.name}</em> selected
+          // </p>) && (
+          <div>
+            <img 
+            src={URL.createObjectURL(imageFile)} 
+            alt="Preview" 
+            className="preview-img" 
+          />
+          </div>
+        )}
+
+        {/* ADDITIONAL FILES FIELD */}
+        <label htmlFor="additionalImages" className="upload-prompt">
+          + Optional: add up to 3 more photos
+        </label>
+        <input 
+          type="file"
+          id="additionalImages"
+          name="additionalImages"
+          onChange={handleAdditionalImagesUpload}
+          style={{ display: 'none' }}
+          multiple 
+          accept="image/*"
+        />
+        {additionalImageFiles.length > 0 && (
+        <div>
+          {additionalImageFiles.map((file, index) => (
+            <img
+              key={index}
+              src={URL.createObjectURL(file)}
+              alt={`Additional ${index + 1}`}
+              className="preview-add-img"
+            />
+          ))}
+        </div>
+      )}
+
 
         {/* NAME FIELD */}
         <input
@@ -162,7 +222,7 @@ function AddItem() {
         {/* CONDITION FIELD */}
         <div className="options">
           <span className="label">CONDITION:</span>
-          {['new', 'good', 'poor'].map((c) => (
+          {['new', 'good', 'fair', 'poor'].map((c) => (
             <label key={c} className="label">
             <input
               type="radio"

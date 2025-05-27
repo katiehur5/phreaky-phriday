@@ -47,18 +47,6 @@
   justify-content: center;
 }
 
-/* .pill {
-  padding: 0.4rem 1rem;
-  border-radius: 999px;
-  border: 1px solid #ccc;
-  color: #444;
-  background-color: white;
-  font-family: 'Prata', serif;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-} */
-
 button.pill {
   all: unset;
   display: inline-block;

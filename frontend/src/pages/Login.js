@@ -16,7 +16,7 @@ function Login() {
     e.preventDefault();
     try {
       const response = await API.post('/auth/login', formData);
-      
+
       // Store user token and ID in localStorage
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('userId', response.data.user._id);

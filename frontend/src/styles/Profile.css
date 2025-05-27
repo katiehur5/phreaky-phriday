@@ -53,4 +53,21 @@
 
 .profile-wrapper {
     min-height: 100vh;
-  }
+}
+
+.contact-link {
+  text-decoration: underline;
+  font-weight: 400;
+  transition: color 0.2s ease;
+  color: #7E5BEF;
+
+}
+
+.contact-link:hover {
+  color: #ff69b4;
+}
+
+.contact-link:focus {
+  outline: 2px dashed #ccc;
+  outline-offset: 2px;
+}

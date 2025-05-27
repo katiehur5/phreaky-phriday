@@ -28,11 +28,22 @@ function ItemDetail() {
       <Navbar />
       <div className="item-detail-content">
       <div className="item-detail-card">
-        <img
-          className="item-detail-img"
-          src={`http://localhost:3000/${item.imagePath}`}
-          alt={item.name}
-        />
+        <div className="item-images">
+          <img
+            className="item-detail-img"
+            src={`http://localhost:3000/${item.imagePath}`}
+            alt={item.name}
+          />
+          <div className="additional-imgs">
+            {item.additionalImages?.map((img, index) => (
+              <img key={index} 
+              src={`http://localhost:3000/${img}`}
+              alt={`Additional ${index}`} 
+              className="sub-img"
+              />
+            ))}
+          </div>
+        </div>
         <div className="item-detail-info">
           <h1>{item.name}</h1>
           <p className="description">{item.description}</p>

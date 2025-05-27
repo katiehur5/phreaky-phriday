@@ -4,6 +4,7 @@ const ItemSchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String },
   imagePath: { type: String },
+  additionalImages: [{ type: String }],
   owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, // The user who owns this item
   isAvailable: { type: Boolean, default: true },
   category: { 
@@ -20,7 +21,7 @@ const ItemSchema = new mongoose.Schema({
   },
   condition: {
     type: String, 
-    enum: ['new', 'good', 'poor'],
+    enum: ['new', 'good', 'fair', 'poor'],
     required: false,
     default: undefined,
   },    

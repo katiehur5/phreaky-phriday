@@ -54,7 +54,17 @@ function Profile() {
         <Navbar />
     <div className="profile-container">
       <h1>{user.name}'s Closet</h1>
-      <p>Email: {user.email}</p>
+      <p><strong>Email:</strong>{' '}
+        <a className="contact-link" href={`mailto:${user.email}`}>
+            {user.email}
+        </a>
+      </p>
+      <p><strong>Digits:</strong>{' '}
+        <a className="contact-link" href={`sms:${user.phoneNumber}`}>
+          {user.phoneNumber}</a>
+      </p>
+      {/* <p>Email: {user.email}</p>
+      <p>Digits: {user.phoneNumber}</p> */}
       <div className="profile-items">
         {user.items?.length ? (
           <ProfileMasonryGrid items={user.items} onDelete={handleDelete} />

@@ -18,18 +18,22 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-
 // POST /api/items - Add a new item
-router.post('/', authenticate, upload.single('image'), async (req, res) => {
+router.post('/', authenticate, upload.fields([
+  { name: 'image', maxCount: 1 },
+  { name: 'additionalImages', maxCount: 3 }
+]), async (req, res) => {
   try {
 
     const { name, description, owner, isAvailable, category, subcategory, condition, size, swapType, washInstructions, price } = req.body;
-    const imagePath = `uploads/${req.file.filename}`;
+    const mainImage = `uploads/${req.files['image']?.[0]?.filename}`;
+    const additionalImages = (req.files['additionalImages'] || []).map(file => `uploads/${file.filename}`);
 
     const item = new Item({ 
       name,
       description, 
-      imagePath, 
+      imagePath: mainImage, 
+      additionalImages,
       owner: req.user.id,
       isAvailable,
       category,
@@ -48,6 +52,38 @@ router.post('/', authenticate, upload.single('image'), async (req, res) => {
     res.status(500).json({ error: 'Error adding item', details: err.message });
   }
 });
+
+
+
+// // POST /api/items - Add a new item
+// router.post('/', authenticate, upload.single('image'), async (req, res) => {
+//   try {
+
+//     const { name, description, owner, isAvailable, category, subcategory, condition, size, swapType, washInstructions, price } = req.body;
+//     const imagePath = `uploads/${req.file.filename}`;
+
+//     const item = new Item({ 
+//       name,
+//       description, 
+//       imagePath, 
+//       owner: req.user.id,
+//       isAvailable,
+//       category,
+//       subcategory,
+//       condition,
+//       size,
+//       swapType,
+//       washInstructions,
+//       price,
+//     });
+
+//     await item.save();
+//     res.status(201).json({ message: 'Item added successfully!', item });
+//   } catch (err) {
+//     console.error('Error adding item:', err);
+//     res.status(500).json({ error: 'Error adding item', details: err.message });
+//   }
+// });
 
 // POST /api/items/:id/like - like an item
 router.post('/:id/like', authenticate, async (req, res) => {
