@@ -12,7 +12,10 @@ const MONGO_URI = 'mongodb+srv://katiehur:Phreakyphriday22!@phreakyphriday.1hyfr
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:3001', 'http://192.168.20.140:3001'],
+  credentials: true
+}));
 
 // Use the user routes
 app.use('/api/users', userRoutes);

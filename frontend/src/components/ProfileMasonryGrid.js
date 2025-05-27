@@ -18,7 +18,7 @@ const ProfileMasonryGrid = ({ items, onDelete }) => {
       {items.map(item => (
         <div className="masonry-card" key={item._id}>
           <img 
-            src={`http://localhost:3000/${item.imagePath}`} 
+            src={`http://192.168.20.140:3000/${item.imagePath}`} 
             alt={item.name} 
             className="masonry-img" 
           />

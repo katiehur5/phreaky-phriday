@@ -33,7 +33,7 @@ const MasonryGrid = ({ items, onDelete, onLike, likedItems }) => {
             {likedItems.includes(item._id) ? <FaHeart /> : <FaRegHeart />}
           </div>
           <img 
-            src={`http://localhost:3000/${item.imagePath}`} 
+            src={`http://192.168.20.140:3000/${item.imagePath}`} 
             alt={item.name} 
             className="masonry-img" 
           />

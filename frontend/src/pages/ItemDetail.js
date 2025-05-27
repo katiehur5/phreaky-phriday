@@ -31,13 +31,13 @@ function ItemDetail() {
         <div className="item-images">
           <img
             className="item-detail-img"
-            src={`http://localhost:3000/${item.imagePath}`}
+            src={`http://192.168.20.140:3000/${item.imagePath}`}
             alt={item.name}
           />
           <div className="additional-imgs">
             {item.additionalImages?.map((img, index) => (
               <img key={index} 
-              src={`http://localhost:3000/${img}`}
+              src={`http://192.168.20.140:3000/${img}`}
               alt={`Additional ${index}`} 
               className="sub-img"
               />

@@ -165,18 +165,18 @@ function AddItem() {
 
         {/* CATEGORY FIELD */}
         <div className="options">
-          <span className="label">CATEGORY:</span>
+          <span className="field-label">CATEGORY:</span>
           {['clothing', 'shoes', 'accessories', 'home goods', 'other'].map((c) => (
-            <label key={c} className="label">
-            <input
-              type="radio"
-              name="category"
-              value={c}
-              checked={formData.category === c}
-              onChange={handleChange}
-              // required
-            />
-              {c}
+            <label key={c} className="radio-option">
+              <input
+                type="radio"
+                name="category"
+                value={c}
+                checked={formData.category === c}
+                onChange={handleChange}
+                // required
+              />
+              <span>{c}</span>
             </label>
           ))}
         </div>
@@ -184,9 +184,9 @@ function AddItem() {
         {/* CONDITIONAL SUBCATEGORY FIELDS */}
         {formData.category === 'clothing' && (
           <div className="options">
-            <span className="label">CLOTHING TYPE:</span>
+            <span className="field-label">CLOTHING TYPE:</span>
           {['dress', 'top', 'bottom', 'outerwear', 'other'].map((c) => (
-            <label key={c} className="label">
+            <label key={c} className="radio-option">
             <input
               type="radio"
               name="subcategory"
@@ -221,9 +221,9 @@ function AddItem() {
 
         {/* CONDITION FIELD */}
         <div className="options">
-          <span className="label">CONDITION:</span>
+          <span className="field-label">CONDITION:</span>
           {['new', 'good', 'fair', 'poor'].map((c) => (
-            <label key={c} className="label">
+            <label key={c} className="radio-option">
             <input
               type="radio"
               name="condition"
@@ -239,9 +239,9 @@ function AddItem() {
 
         {/* SWAP TYPE FIELD */}
         <div className="options">
-          <span className="label">SWAP TYPE:</span>
+          <span className="field-label">SWAP TYPE:</span>
         {['buy me', 'take me', 'borrow me'].map((c) => (
-            <label key={c} className="label">
+            <label key={c} className="radio-option">
             <input
               type="radio"
               name="swapType"

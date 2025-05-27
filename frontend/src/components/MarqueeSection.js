@@ -2,11 +2,11 @@ import React from 'react';
 import '../styles/MarqueeSection.css';
 
 const images = [
-  'http://localhost:3000/uploads/home_marquee/IMG_5997.JPG',
-  'http://localhost:3000/uploads/home_marquee/IMG_5998.JPG',
-  'http://localhost:3000/uploads/home_marquee/IMG_6001.JPG',
-  'http://localhost:3000/uploads/home_marquee/alicia.jpg',
-  'http://localhost:3000/uploads/home_marquee/aliciabryn.jpg',
+  'http://192.168.20.140:3000/uploads/home_marquee/IMG_5997.JPG',
+  'http://192.168.20.140:3000/uploads/home_marquee/IMG_5998.JPG',
+  'http://192.168.20.140:3000/uploads/home_marquee/IMG_6001.JPG',
+  'http://192.168.20.140:3000/uploads/home_marquee/alicia.jpg',
+  'http://192.168.20.140:3000/uploads/home_marquee/aliciabryn.jpg',
   // Add more as needed
 ];
 
