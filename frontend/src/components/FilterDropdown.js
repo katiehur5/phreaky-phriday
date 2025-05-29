@@ -12,8 +12,6 @@ const FilterDropdown = ({ options, selected = [], setSelected }) => {
         }
     };
 
-    console.log("safeSelected:", safeSelected);
-
     return (
     <div className="dropdown-pill-container">
         {options.map((option) => (
