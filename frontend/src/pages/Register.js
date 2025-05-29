@@ -27,14 +27,6 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault(); // no page reload
     try {
-      console.log('Submitting registration form:', {
-        name: formData.name,
-        email: formData.email,
-        password: formData.password,
-        phoneNumber: formData.phoneNumber,
-        classYear: formData.classYear
-      });
-
       const response = await API.post('/auth/register', formData);
 
       localStorage.setItem('token', response.data.token);
