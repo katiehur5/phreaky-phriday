@@ -254,6 +254,7 @@ function AddItem() {
             </label>
           ))}
         </div>
+
         {/* CONDITIONAL WASH / PRICE FIELDS */}
         {formData.swapType === 'borrow me' && (
           <input

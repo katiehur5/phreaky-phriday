@@ -53,38 +53,6 @@ router.post('/', authenticate, upload.fields([
   }
 });
 
-
-
-// // POST /api/items - Add a new item
-// router.post('/', authenticate, upload.single('image'), async (req, res) => {
-//   try {
-
-//     const { name, description, owner, isAvailable, category, subcategory, condition, size, swapType, washInstructions, price } = req.body;
-//     const imagePath = `uploads/${req.file.filename}`;
-
-//     const item = new Item({ 
-//       name,
-//       description, 
-//       imagePath, 
-//       owner: req.user.id,
-//       isAvailable,
-//       category,
-//       subcategory,
-//       condition,
-//       size,
-//       swapType,
-//       washInstructions,
-//       price,
-//     });
-
-//     await item.save();
-//     res.status(201).json({ message: 'Item added successfully!', item });
-//   } catch (err) {
-//     console.error('Error adding item:', err);
-//     res.status(500).json({ error: 'Error adding item', details: err.message });
-//   }
-// });
-
 // POST /api/items/:id/like - like an item
 router.post('/:id/like', authenticate, async (req, res) => {
   const userId = req.user.id;

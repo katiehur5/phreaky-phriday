@@ -49,6 +49,9 @@ const ItemSchema = new mongoose.Schema({
   likes: [{
     type: mongoose.Schema.Types.ObjectId, ref: 'User'
   }],
+  // eventTags: [{ 
+  //   type: String
+  // }],
 });
 
 module.exports = mongoose.model('Item', ItemSchema);
