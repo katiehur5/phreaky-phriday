@@ -12,8 +12,20 @@ const MONGO_URI = 'mongodb+srv://katiehur:Phreakyphriday22!@phreakyphriday.1hyfr
 
 const app = express();
 app.use(express.json());
+const allowedOrigins = [
+  'http://localhost:3001',  // for local development
+  'http://192.168.20.140:3001', // my local IP
+  'https://phreaky-phriday.onrender.com'  // deployed frontend
+];
+
 app.use(cors({
-  origin: ['http://localhost:3001', 'http://192.168.20.140:3001'],
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 
