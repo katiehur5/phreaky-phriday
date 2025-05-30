@@ -27,7 +27,7 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault(); // no page reload
     try {
-      const response = await API.post('/auth/register', formData);
+      const response = await API.post('/api/auth/register', formData);
 
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('userId', response.data.user._id);

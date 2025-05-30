@@ -15,7 +15,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await API.post('/auth/login', formData);
+      const response = await API.post('/api/auth/login', formData);
 
       // Store user token and ID in localStorage
       localStorage.setItem('token', response.data.token);

@@ -78,7 +78,7 @@ function AddItem() {
       }
 
 
-      await API.post('/items', form, {
+      await API.post('/api/items', form, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',

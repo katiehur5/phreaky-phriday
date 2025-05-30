@@ -66,7 +66,7 @@ function Items() {
       return;
     }
     try {
-      const response = await API.post(`/items/${id}/like`, {}, {
+      const response = await API.post(`/api/items/${id}/like`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
