@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://192.168.20.140:3000/api', // Replace with your backend URL if deployed
+  baseURL: process.env.REACT_APP_API_URL,
+  withCredentials: true,
 });
 
 // api.js
