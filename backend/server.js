@@ -15,7 +15,9 @@ app.use(express.json());
 const allowedOrigins = [
   'http://localhost:3001',  // for local development
   'http://192.168.20.140:3001', // my local IP
-  'https://phreaky-phriday.vercel.app'  // deployed frontend
+  'https://phreaky-phriday.vercel.app',  // deployed frontend
+  'https://phreaky-phriday-git-main-katiehur5s-projects.vercel.app/',
+  'https://phreaky-phriday-5lakpvgxb-katiehur5s-projects.vercel.app/'
 ];
 
 app.use(cors({
