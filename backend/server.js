@@ -5,19 +5,18 @@ const userRoutes = require('./routes/users');
 const itemRoutes = require('./routes/items');
 const authRoutes = require('./routes/auth');
 require('dotenv').config();
-
 const path = require('path');
 
-const MONGO_URI = 'mongodb+srv://katiehur:Phreakyphriday22!@phreakyphriday.1hyfr.mongodb.net/?retryWrites=true&w=majority&appName=PhreakyPhriday';
+const MONGO_URI = process.env.MONGO_URI;
 
 const app = express();
-app.use(express.json());
+
 const allowedOrigins = [
   'http://localhost:3001',  // for local development
   'http://192.168.20.140:3001', // my local IP
   'https://phreaky-phriday.vercel.app',  // deployed frontend
-  'https://phreaky-phriday-git-main-katiehur5s-projects.vercel.app/',
-  'https://phreaky-phriday-5lakpvgxb-katiehur5s-projects.vercel.app/'
+  'https://phreaky-phriday-git-main-katiehur5s-projects.vercel.app',
+  'https://phreaky-phriday-5lakpvgxb-katiehur5s-projects.vercel.app'
 ];
 
 app.use(cors({
@@ -30,6 +29,8 @@ app.use(cors({
   },
   credentials: true
 }));
+
+app.use(express.json());
 
 // Use the user routes
 app.use('/api/users', userRoutes);
