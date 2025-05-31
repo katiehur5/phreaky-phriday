@@ -12,7 +12,7 @@ function Profile() {
   useEffect(() => {
     async function fetchUser() {
       try {
-        const res = await API.get(`/users/${userId}`);
+        const res = await API.get(`/api/users/${userId}`);
         setUser(res.data);
       } catch (err) {
         console.error('Failed to fetch user', err);
@@ -31,7 +31,7 @@ function Profile() {
 
     try {
         const token = localStorage.getItem('token');
-        await API.delete(`/items/${itemId}`, {
+        await API.delete(`/api/items/${itemId}`, {
         headers: {
             Authorization: `Bearer ${token}`,
         },

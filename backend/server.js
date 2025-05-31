@@ -19,7 +19,8 @@ const allowedOrigins = [
   'https://phreaky-phriday.vercel.app',  // deployed frontend
   'https://phreaky-phriday-git-main-katiehur5s-projects.vercel.app',
   'https://phreaky-phriday-5lakpvgxb-katiehur5s-projects.vercel.app',
-  'https://phreaky-phriday-katiehur5s-projects.vercel.app'
+  'https://phreaky-phriday-katiehur5s-projects.vercel.app',
+  'https://phreaky-phriday-pubxi4vnq-katiehur5s-projects.vercel.app',
 ];
 
 app.use(cors({

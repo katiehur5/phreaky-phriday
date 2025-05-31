@@ -11,7 +11,7 @@ function ItemDetail() {
   useEffect(() => {
     async function fetchItem() {
       try {
-        const res = await API.get(`/items/${id}`);
+        const res = await API.get(`/api/items/${id}`);
         setItem(res.data);
       } catch (err) {
         console.error('Failed to load item:', err);

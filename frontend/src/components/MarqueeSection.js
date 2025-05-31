@@ -1,12 +1,14 @@
 import React from 'react';
 import '../styles/MarqueeSection.css';
 
+const baseUrl = process.env.REACT_APP_API_URL;
+
 const images = [
-  'http://192.168.20.140:3000/uploads/home_marquee/IMG_5997.JPG',
-  'http://192.168.20.140:3000/uploads/home_marquee/IMG_5998.JPG',
-  'http://192.168.20.140:3000/uploads/home_marquee/IMG_6001.JPG',
-  'http://192.168.20.140:3000/uploads/home_marquee/alicia.jpg',
-  'http://192.168.20.140:3000/uploads/home_marquee/aliciabryn.jpg',
+  `${baseUrl}/uploads/home_marquee/IMG_5997.JPG`,
+  `${baseUrl}/uploads/home_marquee/IMG_5998.JPG`,
+  `${baseUrl}/uploads/home_marquee/IMG_6001.JPG`,
+  `${baseUrl}/uploads/home_marquee/alicia.jpg`,
+  `${baseUrl}/uploads/home_marquee/aliciabryn.jpg`,
   // Add more as needed
 ];
 

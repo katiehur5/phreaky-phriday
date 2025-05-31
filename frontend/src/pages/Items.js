@@ -25,7 +25,7 @@ function Items() {
             if (value) params.append(key, value);
           });
         }
-        const response = await API.get(`/items?${params.toString()}`);
+        const response = await API.get(`/api/items?${params.toString()}`);
         setItems(response.data);
         setLikedItems(response.data
           .filter(i => i.likedByCurrentUser)
@@ -46,7 +46,7 @@ function Items() {
     const token = localStorage.getItem('token');
 
     try {
-      await API.delete(`/items/${id}`, {
+      await API.delete(`/api/items/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -69,22 +69,6 @@ function Items() {
       const response = await API.post(`/api/items/${id}/like`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
-
-      // Toggle like state locally for quick UI update
-      // setLikedItems(prev =>
-      //   prev.includes(id)
-      //     ? prev.filter(item => item !== id) // Unlike
-      //     : [...prev, id] // Like
-      // );
-
-      // // update like count in the item list
-      // setItems(prevItems =>
-      //   prevItems.map(item =>
-      //     item._id === id
-      //       ? { ...item, likes: response.data.likes }
-      //       : item
-      //   )
-      // );
 
       fetchItems();
     } catch (err) {
