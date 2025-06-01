@@ -3,18 +3,10 @@ const express = require('express');
 const router = express.Router();
 const Item = require('../models/Item'); // Import Item model
 const authenticate = require('../middleware/authenticate');
-
-const multer = require('multer');
 const path = require('path');
+const multer = require('multer');
 
-const storage = multer.diskStorage({
-  destination: 'uploads/',
-  filename: (req, file, cb) => {
-    const ext = path.extname(file.originalname); // get .jpg, .png etc.
-    const uniqueName = Date.now() + '-' + Math.round(Math.random() * 1E9) + ext;
-    cb(null, uniqueName);
-  },
-});
+const { storage } = require('../config/cloudinary');
 
 const upload = multer({ storage });
 
@@ -26,8 +18,10 @@ router.post('/', authenticate, upload.fields([
   try {
 
     const { name, description, owner, isAvailable, category, subcategory, condition, size, swapType, washInstructions, price } = req.body;
-    const mainImage = `uploads/${req.files['image']?.[0]?.filename}`;
-    const additionalImages = (req.files['additionalImages'] || []).map(file => `uploads/${file.filename}`);
+    // const mainImage = `uploads/${req.files['image']?.[0]?.filename}`;
+    // const additionalImages = (req.files['additionalImages'] || []).map(file => `uploads/${file.filename}`);
+    const mainImage = req.files['image']?.[0]?.path;
+    const additionalImages = (req.files['additionalImages'] || []).map(file => file.path);
 
     const item = new Item({ 
       name,
