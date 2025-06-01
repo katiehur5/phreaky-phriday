@@ -35,7 +35,7 @@ const MasonryGrid = ({ items, onDelete, onLike, likedItems }) => {
             {likedItems.includes(item._id) ? <FaHeart /> : <FaRegHeart />}
           </div>
           <img 
-            src={`${baseUrl}/${item.imagePath}`} 
+            src={item.imagePath} 
             alt={item.name} 
             className="masonry-img" 
           />
