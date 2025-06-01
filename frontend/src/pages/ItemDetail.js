@@ -23,6 +23,8 @@ function ItemDetail() {
 
   if (!item) return <p>Loading...</p>;
 
+  const baseUrl = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+
   return (
     <div className="item-detail-wrapper">
       <Navbar />
@@ -31,13 +33,13 @@ function ItemDetail() {
         <div className="item-images">
           <img
             className="item-detail-img"
-            src={`http://192.168.20.140:3000/${item.imagePath}`}
+            src={`${baseUrl}/${item.imagePath}`}
             alt={item.name}
           />
           <div className="additional-imgs">
             {item.additionalImages?.map((img, index) => (
               <img key={index} 
-              src={`http://192.168.20.140:3000/${img}`}
+              src={`${baseUrl}/${img}`}
               alt={`Additional ${index}`} 
               className="sub-img"
               />

@@ -14,6 +14,8 @@ const MasonryGrid = ({ items, onDelete, onLike, likedItems }) => {
 
   const userId = localStorage.getItem('userId');
 
+  const baseUrl = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+
   return (
     <Masonry
       breakpointCols={breakpointColumnsObj}
@@ -33,7 +35,7 @@ const MasonryGrid = ({ items, onDelete, onLike, likedItems }) => {
             {likedItems.includes(item._id) ? <FaHeart /> : <FaRegHeart />}
           </div>
           <img 
-            src={`http://192.168.20.140:3000/${item.imagePath}`} 
+            src={`${baseUrl}/${item.imagePath}`} 
             alt={item.name} 
             className="masonry-img" 
           />

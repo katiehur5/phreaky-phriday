@@ -9,6 +9,8 @@ const ProfileMasonryGrid = ({ items, onDelete }) => {
     600: 1
   };
 
+  const baseUrl = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+
   return (
     <Masonry
       breakpointCols={breakpointColumnsObj}
@@ -18,7 +20,7 @@ const ProfileMasonryGrid = ({ items, onDelete }) => {
       {items.map(item => (
         <div className="masonry-card" key={item._id}>
           <img 
-            src={`http://192.168.20.140:3000/${item.imagePath}`} 
+            src={`${baseUrl}/${item.imagePath}`} 
             alt={item.name} 
             className="masonry-img" 
           />
