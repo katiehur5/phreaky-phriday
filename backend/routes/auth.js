@@ -13,8 +13,6 @@ const generateToken = (user) => {
 // **1. User Registration**
 router.post('/register', async (req, res) => {
   try {
-    console.log('Registration attempt with data:', { ...req.body, password: '[REDACTED]' });
-    
     const { name, phoneNumber, email, password, classYear } = req.body;
 
     // Enforce Yale email
@@ -37,9 +35,9 @@ router.post('/register', async (req, res) => {
       classYear 
     });
 
-    console.log('Attempting to save new user...');
+    // console.log('Attempting to save new user...');
     await newUser.save();
-    console.log('User saved successfully');
+    // console.log('User saved successfully');
 
     const token = generateToken(newUser);
     res.status(201).json({ 

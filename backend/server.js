@@ -9,7 +9,6 @@ const path = require('path');
 
 // Log the MongoDB URI (with password redacted) for debugging
 const MONGO_URI = process.env.MONGO_URI;
-console.log('MongoDB URI (redacted):', MONGO_URI.replace(/:[^:@]+@/, ':****@'));
 
 const app = express();
 
@@ -58,7 +57,7 @@ const PORT = process.env.PORT || 3000;
 // Connect to MongoDB and start server
 const startServer = async () => {
   try {
-    console.log('Attempting to connect to MongoDB...');
+    // console.log('Attempting to connect to MongoDB...');
     
     // More explicit connection options
     const options = {
@@ -77,8 +76,8 @@ const startServer = async () => {
     await mongoose.connect(MONGO_URI, options);
     
     // Log connection state
-    console.log('MongoDB connection state:', mongoose.connection.readyState);
-    console.log('MongoDB Connected Successfully');
+    // console.log('MongoDB connection state:', mongoose.connection.readyState);
+    // console.log('MongoDB Connected Successfully');
     
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
@@ -95,16 +94,16 @@ const startServer = async () => {
 };
 
 // Handle MongoDB connection events
-mongoose.connection.on('connected', () => {
-  console.log('Mongoose connected to MongoDB');
-});
+// mongoose.connection.on('connected', () => {
+//   console.log('Mongoose connected to MongoDB');
+// });
 
 mongoose.connection.on('error', (err) => {
   console.error('Mongoose connection error:', err);
 });
 
-mongoose.connection.on('disconnected', () => {
-  console.log('Mongoose disconnected from MongoDB');
-});
+// mongoose.connection.on('disconnected', () => {
+//   console.log('Mongoose disconnected from MongoDB');
+// });
 
 startServer();
