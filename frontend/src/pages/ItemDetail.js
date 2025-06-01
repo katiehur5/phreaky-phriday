@@ -33,13 +33,13 @@ function ItemDetail() {
         <div className="item-images">
           <img
             className="item-detail-img"
-            src={`${baseUrl}/${item.imagePath}`}
+            src={item.imagePath}
             alt={item.name}
           />
           <div className="additional-imgs">
             {item.additionalImages?.map((img, index) => (
               <img key={index} 
-              src={`${baseUrl}/${img}`}
+              src={img}
               alt={`Additional ${index}`} 
               className="sub-img"
               />

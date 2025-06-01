@@ -20,7 +20,7 @@ const ProfileMasonryGrid = ({ items, onDelete }) => {
       {items.map(item => (
         <div className="masonry-card" key={item._id}>
           <img 
-            src={`${baseUrl}/${item.imagePath}`} 
+            src={item.imagePath} 
             alt={item.name} 
             className="masonry-img" 
           />
