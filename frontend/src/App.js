@@ -13,6 +13,7 @@ import ItemDetail from './pages/ItemDetail';
 
 function App() {
   return (
+    <>
     <Router>
       {/* <nav>
         <Link to="/">HOME</Link>
@@ -47,6 +48,9 @@ function App() {
         }/>
       </Routes>
     </Router>
+
+    <Analytics />
+    </>
   );
 }
 

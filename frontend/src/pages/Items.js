@@ -52,6 +52,7 @@ function Items() {
         }
       });
       setItems(prevItems => prevItems.filter(item => item._id !== id));
+      navigate('/items');
     } catch (error) {
       console.error('Error deleting item:', error);
       alert('Failed to delete item.');

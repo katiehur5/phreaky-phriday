@@ -155,11 +155,13 @@ button:hover {
 .preview-img {
   width: 50%;
   border-radius: 12px;
-  margin-top: 10px;
+  /* margin-top: 10px; */
 }
 
 .preview-add-img {
   width: 30%;
+  margin-left: 1.5%;
+  margin-right: 1.5%;
   border-radius: 12px;
-  margin-top: 10px;
+  /* margin-top: 10px;  */
 }
