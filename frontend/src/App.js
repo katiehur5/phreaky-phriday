@@ -1,4 +1,5 @@
 import React from 'react';
+import { Analytics } from "@vercel/analytics/react";
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import Home from './pages/Home';
