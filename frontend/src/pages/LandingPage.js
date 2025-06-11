@@ -8,7 +8,7 @@ const LandingPage = () => {
   return (
     <div className="landing-container">
       <h1 className="landing-title">Phreaky Phriday</h1>
-      <p className="landing-subtitle">Gimme dat.</p>
+      <p className="landing-subtitle">So lucky to be...</p>
       <div className="button-group">
         <button className="landing-button" onClick={() => navigate('/register')}>Sign Up</button>
         <button className="landing-button" onClick={() => navigate('/login')}>Log In</button>
