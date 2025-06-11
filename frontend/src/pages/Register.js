@@ -35,7 +35,10 @@ function Register() {
       navigate('/home');
     } catch (error) {
       console.error('Error registering user:', error);
-      if (error.response && error.response.status === 409) {
+      if (emailError) {
+        alert(emailError);
+      }
+      else if (error.response && error.response.status === 409) {
         alert('An account with this email already exists. Try logging in instead.');
       }
       else if (error.response?.data?.message) {

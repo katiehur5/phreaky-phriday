@@ -39,7 +39,8 @@ function Login() {
           placeholder="Email"
           autoComplete="off"
           value={formData.email}
-          onChange={handleChange}
+          // onChange={handleChange}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value.toLowerCase() })}
           required
         />
         <input

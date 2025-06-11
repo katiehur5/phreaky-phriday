@@ -68,7 +68,7 @@ function Profile() {
         {user.items?.length ? (
           <ProfileMasonryGrid items={user.items} onDelete={handleDelete} />
         ) : (
-          <p>This closet is empty</p>
+          <p>Where your clothes at? ಠ_ಠ</p>
         )}
       </div>
     </div>

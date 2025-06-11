@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import API from '../api';
 import Navbar from '../components/Navbar';
 import '../styles/ItemDetail.css';
+import Slider from "react-slick";
+import { CustomNextArrow, CustomPrevArrow } from "../components/CustomArrows";
 
 function ItemDetail() {
   const { id } = useParams();
@@ -30,7 +32,21 @@ function ItemDetail() {
       <Navbar />
       <div className="item-detail-content">
       <div className="item-detail-card">
-        <div className="item-images">
+        <Slider 
+          dots={true} infinite={true} speed={500} slidesToShow={1} slidesToScroll={1} className="item-carousel"
+          swipe={true} touchMove={true} swipeToSlide={true}
+          arrows={true} nextArrow={<CustomNextArrow />} prevArrow={<CustomPrevArrow />}>
+          {[item.imagePath, ...(item.additionalImages || [])].map((img, idx) => (
+            <div key={idx}>
+              <img 
+                src={img} 
+                alt={`Item ${idx}`} 
+                className="carousel-img" 
+              />
+            </div>
+          ))}
+        </Slider>
+        {/* <div className="item-images">
           <img
             className="item-detail-img"
             src={item.imagePath}
@@ -45,7 +61,7 @@ function ItemDetail() {
               />
             ))}
           </div>
-        </div>
+        </div> */}
         <div className="item-detail-info">
           <h1>{item.name}</h1>
           <p className="description">{item.description}</p>

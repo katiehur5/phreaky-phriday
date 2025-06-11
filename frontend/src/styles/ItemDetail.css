@@ -121,3 +121,43 @@
 .sub-img:hover {
   transform: scale(2.00);
 }
+
+.item-carousel {
+  max-width: 500px;
+  margin: 0 auto 2rem;
+  box-sizing: border-box;
+}
+
+.carousel-image-wrapper {
+  position: relative;
+  width: 100%;
+  max-height: 80vh;
+}
+
+.carousel-img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: contain;
+  display: block;
+}
+
+.slick-prev::before,
+.slick-next::before {
+  display: none !important;
+  content: '' !important;
+}
+
+@media (max-width: 768px) {
+  .item-carousel {
+    max-width: 100%;
+    padding: 0 12px;
+  }
+
+  .carousel-img {
+    border-radius: 8px;
+    max-height: 60vh;
+  }
+}
+

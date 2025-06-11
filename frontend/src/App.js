@@ -10,6 +10,9 @@ import PrivateRoute from './components/PrivateRoute';
 import AddItem from './pages/AddItem';
 import Profile from './pages/Profile';
 import ItemDetail from './pages/ItemDetail';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
+
 
 function App() {
   return (

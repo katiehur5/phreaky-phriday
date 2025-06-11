@@ -14,23 +14,25 @@ const generateToken = (user) => {
 router.post('/register', async (req, res) => {
   try {
     const { name, phoneNumber, email, password, classYear } = req.body;
+    const lowerEmail = email.toLowerCase();
 
     // Enforce Yale email
     const yaleEmailRegex = /^[a-zA-Z0-9._%+-]+@yale\.edu$/;
-    if (!yaleEmailRegex.test(email)) {
-      return res.status(400).json({ error: 'Email must be a Yale address.' });
+    if (!yaleEmailRegex.test(lowerEmail)) {
+      alert('Email must be a Yale address.');
+      return res.status(422).json({ error: 'Email must be a Yale address.' });
     }
 
     // check for existing user
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ lowerEmail });
     if (existingUser) {
-      return res.status(400).json({ error: 'Email already registered' });
+      return res.status(409).json({ error: 'Email already registered' });
     }
 
     const newUser = new User({ 
       name, 
       phoneNumber, 
-      email, 
+      email: lowerEmail, 
       password, 
       classYear 
     });
@@ -63,8 +65,9 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ email });
-
+    const lowerEmail = email.toLowerCase();
+    
+    const user = await User.findOne({ lowerEmail });
 
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(401).json({ error: 'Invalid credentials' });

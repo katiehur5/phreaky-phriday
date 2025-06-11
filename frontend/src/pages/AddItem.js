@@ -205,7 +205,7 @@ function AddItem() {
         <input
           type="text"
           name="size"
-          placeholder="Size (optional)"
+          placeholder="Size"
           value={formData.size}
           onChange={handleChange}
         />
