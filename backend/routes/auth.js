@@ -19,7 +19,7 @@ router.post('/register', async (req, res) => {
     // Enforce Yale email
     const yaleEmailRegex = /^[a-zA-Z0-9._%+-]+@yale\.edu$/;
     if (!yaleEmailRegex.test(lowerEmail)) {
-      alert('Email must be a Yale address.');
+      // alert('Email must be a Yale address.');
       return res.status(422).json({ error: 'Email must be a Yale address.' });
     }
 
@@ -63,11 +63,19 @@ router.post('/register', async (req, res) => {
 
 // **2. User Login**
 router.post('/login', async (req, res) => {
+  console.log('LOGIN ROUTE HIT');
   try {
     const { email, password } = req.body;
     const lowerEmail = email.toLowerCase();
+    console.log("Attempting login with:", lowerEmail);
     
-    const user = await User.findOne({ lowerEmail });
+    const user = await User.findOne({ email: lowerEmail });
+
+    console.log("Found user:", user);
+    if (user) {
+      const match = await bcrypt.compare(password, user.password);
+      console.log("Password match?", match);
+    }
 
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(401).json({ error: 'Invalid credentials' });

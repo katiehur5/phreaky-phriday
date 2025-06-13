@@ -5,15 +5,19 @@ import '../styles/Login.css'; // Import styles
 
 function Login() {
   const [formData, setFormData] = useState({ email: '', password: '' });
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    setError(''); // Clear error when user types
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(''); // Clear any previous errors
+    
     try {
       const response = await API.post('/api/auth/login', formData);
 
@@ -21,17 +25,27 @@ function Login() {
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('userId', response.data.user._id);
 
-      alert('Login successful!');
       navigate('/home'); // Redirect to homepage after login
     } catch (error) {
       console.error('Login failed:', error);
-      alert('Invalid credentials. Please try again.');
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        setError(error.response.data.error || 'Invalid email or password');
+      } else if (error.request) {
+        // The request was made but no response was received
+        setError('Unable to connect to the server. Please check your internet connection.');
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        setError('An unexpected error occurred. Please try again.');
+      }
     }
   };
 
   return (
     <div className="login-container">
       <h1>Welcome back!</h1>
+      {error && <div className="error-message">{error}</div>}
       <form onSubmit={handleSubmit}>
         <input
           type="email"
@@ -39,7 +53,6 @@ function Login() {
           placeholder="Email"
           autoComplete="off"
           value={formData.email}
-          // onChange={handleChange}
           onChange={(e) => setFormData({ ...formData, email: e.target.value.toLowerCase() })}
           required
         />
