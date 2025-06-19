@@ -46,22 +46,6 @@ function ItemDetail() {
             </div>
           ))}
         </Slider>
-        {/* <div className="item-images">
-          <img
-            className="item-detail-img"
-            src={item.imagePath}
-            alt={item.name}
-          />
-          <div className="additional-imgs">
-            {item.additionalImages?.map((img, index) => (
-              <img key={index} 
-              src={img}
-              alt={`Additional ${index}`} 
-              className="sub-img"
-              />
-            ))}
-          </div>
-        </div> */}
         <div className="item-detail-info">
           <h1>{item.name}</h1>
           <p className="description">{item.description}</p>

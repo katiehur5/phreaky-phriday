@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar';
 import MasonryGrid from '../components/MasonryGrid';
 import FilterBar from '../components/FilterBar';
 import { useNavigate } from 'react-router-dom';
+import LoadingAnimation from '../components/LoadingAnimation';
 
 function Items() {
   const [items, setItems] = useState([]);
@@ -16,8 +17,10 @@ function Items() {
   });
   const [likedItems, setLikedItems] = useState([]);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   const fetchItems = async() => {
+    setLoading(true);
     try {
         const params = new URLSearchParams();
         for (const key in filters) {
@@ -32,12 +35,15 @@ function Items() {
           .map(i => i._id));
     } catch (error) {
       console.error('Error fetching items:', error);
+    } finally {
+      setLoading(false);
     }
   }
 
   useEffect(() => {
     fetchItems();
   }, [filters]);
+
 
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm('Are you sure you want to delete this item?');
@@ -78,6 +84,10 @@ function Items() {
   }
 
   return (
+    // <>
+    // {loading ? (
+    //   <LoadingAnimation />
+    // ) : (
     <div className="items-wrapper">
       <Navbar />
     <div className="items-container">
@@ -92,6 +102,8 @@ function Items() {
       </>
     </div>
     </div>
+    // )}
+    // </>
   );
 }
 

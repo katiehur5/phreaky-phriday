@@ -52,7 +52,7 @@ function Profile() {
     <div className="profile-wrapper">
         <Navbar />
     <div className="profile-container">
-      <h1>{user.name}'s Closet</h1>
+      <h1>{user.name}'s Closet ({ user.itemCount || 0 })</h1>
       <p><strong>Email:</strong>{' '}
         <a className="contact-link" href={`mailto:${user.email}`}>
             {user.email}

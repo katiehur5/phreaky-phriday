@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import API from '../api';
 import { useNavigate } from 'react-router-dom';
+import '../styles/Register.css';
 
 function Register() {
   const [formData, setFormData] = useState({ 
@@ -11,56 +12,109 @@ function Register() {
     classYear: ''
   });
 
-  const [emailError, setEmailError] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    setError(''); // Clear error when user types
 
+    // Validate Yale email as user types
     if (name === 'email') {
       const isYaleEmail = /^[a-zA-Z0-9._%+-]+@yale\.edu$/.test(value);
-      setEmailError(isYaleEmail ? '' : 'Email must be a yale.edu address');
+      if (!isYaleEmail && value) {
+        setError('Please register with Yale email');
+      } else {
+        setError('');
+      }
     }
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // no page reload
+    e.preventDefault();
+    
+    // Final validation before submission
+    const isYaleEmail = /^[a-zA-Z0-9._%+-]+@yale\.edu$/.test(formData.email);
+    if (!isYaleEmail) {
+      setError('Please register with Yale email');
+      return;
+    }
+
     try {
       const response = await API.post('/api/auth/register', formData);
 
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('userId', response.data.user._id);
-      alert(response.data.message);
       navigate('/home');
     } catch (error) {
       console.error('Error registering user:', error);
-      if (emailError) {
-        alert(emailError);
-      }
-      else if (error.response && error.response.status === 409) {
-        alert('An account with this email already exists. Try logging in instead.');
-      }
-      else if (error.response?.data?.message) {
-        alert(error.response.data.message);
-      }
-      else {
-        alert('Registration failed.');
+      if (error.response) {
+        // Handle specific error cases
+        if (error.response.status === 409 || 
+            (error.response.data.error && error.response.data.error.includes('already registered'))) {
+          setError('An account with this email already exists. Try logging in instead.');
+        } else if (error.response.data.error === 'Email must be a Yale address.') {
+          setError('Please register with Yale email');
+        } else {
+          setError(error.response.data.error || 'Registration failed. Please try again.');
+        }
+      } else if (error.request) {
+        setError('Unable to connect to the server. Please check your internet connection.');
+      } else {
+        setError('An unexpected error occurred. Please try again.');
       }
     }
   };
 
   return (
-    <div style={{ margin: '40px auto', maxWidth: '400px', padding: '20px' }}>
-    <form onSubmit={handleSubmit}>
-      <center><h1>Register</h1></center>
-      <input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleChange} required />
-      <input type="tel" name="phoneNumber" placeholder="Phone Number" value={formData.phoneNumber} onChange={handleChange} />
-      <input type="email" name="email" placeholder="Email" autoComplete="off" value={formData.email} onChange={handleChange} required />
-      <input type="password" name="password" placeholder="Password" autoComplete="new-password" value={formData.password} onChange={handleChange} required />
-      <input type="text" name="classYear" placeholder="Class Year" value={formData.classYear} onChange={handleChange} required />
-      <button type="submit">Register</button>
-    </form>
+    <div className="register-container">
+      <form onSubmit={handleSubmit}>
+        <h1>Register</h1>
+        {error && <div className="error-message">{error}</div>}
+        <input 
+          type="text" 
+          name="name" 
+          placeholder="Name" 
+          value={formData.name} 
+          onChange={handleChange} 
+          required 
+        />
+        <input 
+          type="tel" 
+          name="phoneNumber" 
+          placeholder="Phone Number" 
+          value={formData.phoneNumber} 
+          onChange={handleChange} 
+        />
+        <input 
+          type="email" 
+          name="email" 
+          placeholder="Email" 
+          autoComplete="off" 
+          value={formData.email} 
+          onChange={handleChange} 
+          required 
+        />
+        <input 
+          type="password" 
+          name="password" 
+          placeholder="Password" 
+          autoComplete="new-password" 
+          value={formData.password} 
+          onChange={handleChange} 
+          required 
+        />
+        <input 
+          type="text" 
+          name="classYear" 
+          placeholder="Class Year" 
+          value={formData.classYear} 
+          onChange={handleChange} 
+          required 
+        />
+        <button type="submit">Register</button>
+      </form>
     </div>
   );
 }

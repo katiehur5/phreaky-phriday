@@ -31,7 +31,7 @@
   button:hover {
     background: linear-gradient(135deg, #ff758c, #ff7eb3);
   }
-
+  
   .error-message {
     color: #ff4444;
     background-color: #ffebee;

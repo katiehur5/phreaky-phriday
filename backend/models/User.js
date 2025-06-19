@@ -17,4 +17,15 @@ UserSchema.pre('save', async function (next) {
   next();
 });
 
+// Item count
+UserSchema.virtual('itemCount', {
+  ref: 'Item',
+  localField: '_id',
+  foreignField: 'owner',
+  count: true,
+});
+
+UserSchema.set('toObject', { virtuals: true });
+UserSchema.set('toJSON', { virtuals: true });
+
 module.exports = mongoose.model('User', UserSchema);

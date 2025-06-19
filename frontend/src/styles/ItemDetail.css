@@ -140,7 +140,6 @@
   height: auto;
   border-radius: 12px;
   object-fit: contain;
-  display: block;
 }
 
 .slick-prev::before,

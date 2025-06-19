@@ -7,7 +7,10 @@ require('dotenv').config();
 
 // Generate JWT Token
 const generateToken = (user) => {
-  return jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+  return jwt.sign(
+    { id: user._id }, 
+    process.env.JWT_SECRET, 
+    { expiresIn: '7d' });
 };
 
 // **1. User Registration**
@@ -24,7 +27,7 @@ router.post('/register', async (req, res) => {
     }
 
     // check for existing user
-    const existingUser = await User.findOne({ lowerEmail });
+    const existingUser = await User.findOne({ email: lowerEmail });
     if (existingUser) {
       return res.status(409).json({ error: 'Email already registered' });
     }
@@ -48,15 +51,21 @@ router.post('/register', async (req, res) => {
       token 
     });
   } catch (err) {
+    // Check if it's a duplicate key error (MongoDB error code 11000)
+    if (err.code === 11000) {
+      return res.status(409).json({ error: 'Email already registered' });
+    }
+    
     console.error('Detailed registration error:', {
       message: err.message,
       stack: err.stack,
-      name: err.name
+      name: err.name,
+      code: err.code
     });
+    
     res.status(500).json({ 
-      error: 'Error registering user', 
-      details: err.message,
-      type: err.name
+      error: 'Error registering user',
+      details: err.message
     });
   }
 });

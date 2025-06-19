@@ -29,9 +29,15 @@ function Login() {
     } catch (error) {
       console.error('Login failed:', error);
       if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        setError(error.response.data.error || 'Invalid email or password');
+        // Handle specific error messages from the backend
+        const errorMessage = error.response.data.error;
+        if (errorMessage === 'User not found') {
+          setError("Couldn't find account that matches email");
+        } else if (errorMessage === 'Invalid credentials') {
+          setError('Incorrect password');
+        } else {
+          setError(errorMessage || 'An error occurred during login');
+        }
       } else if (error.request) {
         // The request was made but no response was received
         setError('Unable to connect to the server. Please check your internet connection.');

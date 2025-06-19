@@ -13,13 +13,13 @@ router.post('/register', async (req, res) => {
     // enforce yale email
     const yaleEmailRegex = /^[a-zA-Z0-9._%+-]+@yale\.edu$/;
     if (!yaleEmailRegex.test(lowerEmail)) {
-      return res.status(422).json({ message: "Email must be a Yale address." });
+      return res.status(422).json({ error: 'Email must be a Yale address.' });
     }
 
     // check if already registered
     const existingUser = await User.findOne({ email: lowerEmail });
     if (existingUser) {
-      return res.status(409).json({ message: "An account with this email already exists." });
+      return res.status(409).json({ error: 'Email already registered' });
     }
 
     const user = new User({ 
@@ -28,21 +28,35 @@ router.post('/register', async (req, res) => {
       password, 
       phoneNumber, 
       classYear, 
-      items : [] 
+      items: [] 
     });
     await user.save();
     res.status(201).json({ message: 'User registered successfully!', user });
   } catch (err) {
-    console.error('Error:', err);
-    res.status(500).json({ error: 'Error registering user', details: err.message });
+    // Check if it's a duplicate key error (MongoDB error code 11000)
+    if (err.code === 11000) {
+      return res.status(409).json({ error: 'Email already registered' });
+    }
+    
+    console.error('Detailed registration error:', {
+      message: err.message,
+      stack: err.stack,
+      name: err.name,
+      code: err.code
+    });
+    
+    res.status(500).json({ 
+      error: 'Error registering user',
+      details: err.message
+    });
   }
 });
 
 // GET /api/users/:id - Get user by ID and their items
 router.get('/:id', async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
-    if (!user) return res.status(404).json({ message: 'User not found' });
+    const user = await User.findById(req.params.id).populate('itemCount');
+    if (!user) return res.status(404).json({ error: 'User not found' });
 
     const items = await Item.find({ owner: user._id });
 
@@ -55,7 +69,21 @@ router.get('/:id', async (req, res) => {
       items: items,
     });
   } catch (err) {
-    res.status(500).json({ error: 'Server error', details: err.message });
+    console.error('Error fetching user:', {
+      message: err.message,
+      stack: err.stack,
+      name: err.name,
+      code: err.code
+    });
+    
+    if (err.name === 'CastError') {
+      return res.status(400).json({ error: 'Invalid user ID format' });
+    }
+    
+    res.status(500).json({ 
+      error: 'Error fetching user',
+      details: err.message
+    });
   }
 });
 
