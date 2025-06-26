@@ -26,6 +26,7 @@
 .item-card:hover {
     transform: translateY(-5px);
 }
+
   
 /* Item Image */
 .item-image {
@@ -76,4 +77,5 @@
   
 .items-wrapper {
     min-height: 100vh;
-  }
+}
+

@@ -129,4 +129,26 @@ router.delete('/:id', authenticate, async (req,res) => {
   }
 });
 
+// PUT /api/items/:id/toggle-availability - mark item availability by ID
+router.put('/:id/toggle-availability', authenticate, async (req, res) => {
+  console.log('Toggle availability route hit');
+
+  try {
+    const item = await Item.findById(req.params.id);
+    if (!item) return res.status(404).json({ message: 'Item not found' });
+
+    // Optional: only allow owner to change
+    if (item.owner.toString() !== req.user.id) {
+      return res.status(403).json({ message: 'Unauthorized' });
+    }
+
+    item.isAvailable = !item.isAvailable;
+    await item.save();
+    res.status(200).json({ message: 'Availability updated', isAvailable: item.isAvailable });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
 module.exports = router;

@@ -97,7 +97,22 @@ function Items() {
     } catch (err) {
       console.error('Error liking item:', err);
     }
-  }
+  };
+
+  const toggleAvailability = async (itemId) => {
+    try {
+      const response = await API.put(`/api/items/${itemId}/toggle-availability`);
+      setItems((prevItems) =>
+        prevItems.map(item =>
+          item._id === itemId ? { ...item, isAvailable: response.data.isAvailable } : item
+        )
+      );
+      navigate('/items');
+    } catch (error) {
+      console.error('Error toggling availability:', error);
+    }
+  };
+
 
   return (
     <div className="items-wrapper">
@@ -109,7 +124,7 @@ function Items() {
         {items.length === 0 ? (
           <p>Nothing here yet! o ~ o</p>
         ): (
-          <MasonryGrid items={items} onDelete={handleDelete} onLike={handleLike} likedItems={likedItems}/>
+          <MasonryGrid items={items} onToggleAvailability={toggleAvailability} onDelete={handleDelete} onLike={handleLike} likedItems={likedItems}/>
         )}
       </>
     </div>

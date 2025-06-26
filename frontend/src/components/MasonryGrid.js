@@ -5,7 +5,7 @@ import API from '../api';
 import { Link } from 'react-router-dom';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 
-const MasonryGrid = ({ items, onDelete, onLike, likedItems }) => {
+const MasonryGrid = ({ items, onToggleAvailability, onDelete, onLike, likedItems }) => {
   const breakpointColumnsObj = {
     default: 3,
     900: 2,
@@ -24,7 +24,10 @@ const MasonryGrid = ({ items, onDelete, onLike, likedItems }) => {
     >
       {items.map(item => (
         <Link to={`/items/${item._id}`} key={item._id}>
-          <div className="masonry-card">
+          <div className={`masonry-card ${item.isAvailable ? '' : 'unavailable'}`}>
+            {!item.isAvailable && (
+              <div className="unavailable-overlay">Temporarily Unavailable</div>
+            )}
             <div className="like-section">
               <div 
                 className="like-icon" 
@@ -46,9 +49,26 @@ const MasonryGrid = ({ items, onDelete, onLike, likedItems }) => {
             <h3>{item.name}</h3>
             <p>{item.owner.name}</p>
             {item.owner._id.toString() === userId && (
-              <button onClick={() => onDelete(item._id)} className="delete-button">
-                remove
-              </button>
+              <>
+                <button
+                  className="delete-button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onToggleAvailability(item._id);
+                  }}
+                >
+                  {item.isAvailable ? 'mark unavailable' : 'mark available'}
+                </button>
+                <button 
+                  className="delete-button"
+                  onClick={(e) =>  {
+                    e.preventDefault();
+                    onDelete(item._id);
+                  }}
+                >
+                  remove
+                </button>
+              </>
             )}
           </div>
           </div>

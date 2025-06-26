@@ -16,6 +16,15 @@
   background-position: center center;
 }
 
+@media (max-width: 768px) {
+  .hero {
+    background-image: url('../../public/home_marquee/mobilehomepage.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+}
+
 .home-title {
   font-family: 'Prata', serif;
   font-size: 2.5rem;
@@ -54,7 +63,7 @@
 
 .home-link {
   padding: 0.75rem 2rem;
-  background-color: #f7d1dc;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
   border-radius: 12px;
   text-decoration: none;
   color: #333;
@@ -63,7 +72,7 @@
 }
   
 .home-link:hover {
-  background-color: #f9e4eb;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
   transform: translateY(-2px);
 }
 
@@ -88,13 +97,19 @@
   box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.05);
   text-align: center;
   max-width: 320px;
+  transition: transform 0.3s ease;
+}
+
+.polaroid-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
 }
 
 .polaroid-img {
   width: 100%;
   aspect-ratio: 1/1;
   /* border-radius: 8px; */
-  margin-top: 1rem;
+  margin-top: .5rem;
   margin-bottom: 3rem;
   object-fit: cover;
 }

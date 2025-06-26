@@ -24,6 +24,29 @@
   transform: translateY(-4px);
 }
 
+.masonry-card.unavailable {
+  opacity: 0.9;
+  filter: grayscale(100%);
+}
+.masonry-card.unavailable h3 {
+  text-decoration: line-through;
+}
+
+.unavailable-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: bold;
+  color: #333;
+  z-index: 2;
+  pointer-events: none;
+  text-align: center;
+}
+
 .masonry-img {
   width: 100%;
   display: block;
@@ -55,12 +78,13 @@
 
 .delete-button {
   background-color: #ffe5e5;
-  color: #cc0000;
+  color: #333;
   border: none;
   border-radius: 8px;
   padding: 6px 12px;
   font-size: 0.9rem;
   cursor: pointer;
+  margin: 1px;
 }
 .delete-button:hover {
   background-color: #ffcccc;
