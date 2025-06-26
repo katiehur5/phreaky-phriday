@@ -30,7 +30,7 @@ const Home = () => {
       <section className="home-container">
         <div className="polaroid-card">
           <img
-            src="/home_marquee/aphimerch.JPEG"
+            src='../../public/home_marquee/aphimerch.JPEG'
             alt="Browse prompt"
             className="polaroid-img"
           />
@@ -40,7 +40,7 @@ const Home = () => {
       <section className="home-container">
         <div className="polaroid-card">
           <img
-            src="/home_marquee/sparklers.jpg"
+            src='../../public/home_marquee/sparklers.jpg'
             alt="Upload prompt"
             className="polaroid-img"
           />
@@ -50,7 +50,7 @@ const Home = () => {
       <section className="home-container">
         <div className="polaroid-card">
           <img
-            src="/home_marquee/IMG_5998.JPG"
+            src='../../public/home_marquee/IMG_5998.JPG'
             alt="Profile prompt"
             className="polaroid-img"
           />
