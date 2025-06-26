@@ -27,16 +27,18 @@ function ItemDetail() {
 
   const baseUrl = process.env.REACT_APP_API_URL || 'http://localhost:3000';
 
+  const images = [item.imagePath, ...(item.additionalImages || [])];
+
   return (
     <div className="item-detail-wrapper">
       <Navbar />
       <div className="item-detail-content">
       <div className="item-detail-card">
         <Slider 
-          dots={true} infinite={true} speed={500} slidesToShow={1} slidesToScroll={1} className="item-carousel"
+          dots={images.length > 1} infinite={images.length > 1} speed={500} slidesToShow={1} slidesToScroll={1} className="item-carousel"
           swipe={true} touchMove={true} swipeToSlide={true}
-          arrows={true} nextArrow={<CustomNextArrow />} prevArrow={<CustomPrevArrow />}>
-          {[item.imagePath, ...(item.additionalImages || [])].map((img, idx) => (
+          arrows={images.length > 1} nextArrow={<CustomNextArrow />} prevArrow={<CustomPrevArrow />}>
+          {images.map((img, idx) => (
             <div key={idx}>
               <img 
                 src={img} 

@@ -11,21 +11,52 @@ const Home = () => {
     <div className="home-wrapper">
         <Navbar />
 
-      <div className="home-container">
-        <h1 className="home-title">welcome to phreaky phriday</h1>
-        <p className="home-subtitle">gimme dat.</p>
-        <MarqueeSection />
+      <section className="hero">
+        {/* <h1 className="home-title">welcome to phreaky phriday</h1> */}
+        {/* <p className="home-subtitle">gimme dat.</p> */}
+        {/* <MarqueeSection /> */}
+        {/* <img src={'/loading.gif'} alt="loading..." /> */}
+      </section>
 
-        <div className="home-nav">
+      {/* <section className="home-nav">
+        <Link to="/items" className="home-link">browse items</Link>
+        <Link to="/add-item" className="home-link">upload item</Link>
+        <Link to={`/profile/${userId}`} className="home-link">your profile</Link>
+        {/* Add future sections here */}
+        {/* <Link to="/calendar" className="home-link">Upcoming Events</Link> */}
+        {/* <Link to="/community" className="home-link">Community Board</Link> */}
+      {/* </section> */}
+
+      <section className="home-container">
+        <div className="polaroid-card">
+          <img
+            src="/home_marquee/aphimerch.JPEG"
+            alt="Browse prompt"
+            className="polaroid-img"
+          />
           <Link to="/items" className="home-link">browse items</Link>
-          <Link to="/add-item" className="home-link">upload item</Link>
-          <Link to={`/profile/${userId}`} className="home-link">your profile</Link>
-          {/* Add future sections here */}
-          {/* <Link to="/calendar" className="home-link">Upcoming Events</Link> */}
-          {/* <Link to="/community" className="home-link">Community Board</Link> */}
         </div>
-      </div>
-
+      </section>
+      <section className="home-container">
+        <div className="polaroid-card">
+          <img
+            src="/home_marquee/sparklers.jpg"
+            alt="Upload prompt"
+            className="polaroid-img"
+          />
+          <Link to="/add-item" className="home-link">upload item</Link>
+        </div>
+      </section>
+      <section className="home-container">
+        <div className="polaroid-card">
+          <img
+            src="/home_marquee/IMG_5998.JPG"
+            alt="Profile prompt"
+            className="polaroid-img"
+          />
+          <Link to={`/profile/${userId}`} className="home-link">your profile</Link>
+        </div>
+      </section>
     </div>
   );
 };

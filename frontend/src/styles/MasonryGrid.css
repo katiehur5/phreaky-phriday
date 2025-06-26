@@ -71,16 +71,39 @@ a {
   color: inherit;
 }
 
-.like-icon {
+.like-section {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 8px;
+  left: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.7); /* translucent white */
+  backdrop-filter: blur(4px);
+  border-radius: 16px;
+  padding: 4px 8px;
+  font-size: 14px;
+  color: #333;
+  z-index: 2;
+}
+
+.like-icon {
+  position: relative;
+  /* top: 10px;
+  left: 10px; */
   cursor: pointer;
+  top: 1px;
   color: #d98bbd;
   font-size: 1.2rem;
+  transition: transform 0.2s ease;
   z-index: 2;
   opacity: 1;
+  vertical-align: middle;
 }
 .like-icon:hover {
   transform: scale(1.2);
+}
+
+.like-count {
+  font-weight: 500;
 }

@@ -7,6 +7,7 @@ const images = [
   '/home_marquee/IMG_6001.JPG',
   '/home_marquee/alicia.jpg',
   '/home_marquee/aliciabryn.jpg',
+  '/home_marquee/Home.jpg',
   // Add more as needed
 ];
 

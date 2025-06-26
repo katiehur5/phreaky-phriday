@@ -7,7 +7,7 @@ const categories = ['clothing', 'shoes', 'accessories', 'home goods'];
 const subcategories = ['dress', 'top', 'bottom', 'outerwear'];
 const sizes = ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', '0', '2', '4', '6', '8', '10'];
 
-const FilterBar = ({ filters, setFilters }) => {
+const FilterBar = ({ filters, setFilters, categoryCounts }) => {
   const [openFilter, setOpenFilter] = useState(null);
 
   const toggleOpen = (filterName) => {
@@ -35,6 +35,11 @@ const FilterBar = ({ filters, setFilters }) => {
       )}
     </div>
   );
+
+  // const categoriesWithCounts = cateogires.map(cat => {
+  //   const count = categoryCounts?.[cat] || 0;
+  //   return `${cat} (${count})`;
+  // });
 
   return (
     <div className="filter-bar">

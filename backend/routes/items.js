@@ -62,7 +62,7 @@ router.post('/:id/like', authenticate, async (req, res) => {
   }
 
   await item.save();
-  res.json({ likes: item.likes.length });
+  res.json({ item });
   res.status(200).json({ likes: item.likes.length });
 });
 

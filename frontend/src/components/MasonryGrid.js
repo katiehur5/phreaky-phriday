@@ -25,15 +25,18 @@ const MasonryGrid = ({ items, onDelete, onLike, likedItems }) => {
       {items.map(item => (
         <Link to={`/items/${item._id}`} key={item._id}>
           <div className="masonry-card">
-          <div 
-            className="like-icon" 
-            onClick={(e) =>  {
-              e.preventDefault();
-              onLike(item._id);
-            }}
-          >
-            {likedItems.includes(item._id) ? <FaHeart /> : <FaRegHeart />}
-          </div>
+            <div className="like-section">
+              <div 
+                className="like-icon" 
+                onClick={(e) =>  {
+                  e.preventDefault();
+                  onLike(item._id);
+                }}
+              >
+                {likedItems.includes(item._id) ? <FaHeart /> : <FaRegHeart />}
+              </div>
+              <span className="like-count">{item.likes.length}</span>
+            </div>
           <img 
             src={item.imagePath} 
             alt={item.name} 

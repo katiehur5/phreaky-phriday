@@ -30,6 +30,7 @@ function Items() {
         }
         const response = await API.get(`/api/items?${params.toString()}`);
         setItems(response.data);
+
         setLikedItems(response.data
           .filter(i => i.likedByCurrentUser)
           .map(i => i._id));
@@ -78,22 +79,33 @@ function Items() {
       });
 
       fetchItems();
+      // const updatedItem = response.data;
+
+      // // update item in list
+      // setItems(prevItems => 
+      //   prevItems.map(item =>
+      //     item._id === updatedItem._id ? updatedItem : item
+      //   )
+      // );
+
+      // // update likedItems list
+      // setLikedItems(prev =>
+      //   updatedItem.likes.includes(userId)
+      //   ? [...prev, id]
+      //   : prev.filter(itemId => itemId !== id)
+      // );
     } catch (err) {
       console.error('Error liking item:', err);
     }
   }
 
   return (
-    // <>
-    // {loading ? (
-    //   <LoadingAnimation />
-    // ) : (
     <div className="items-wrapper">
       <Navbar />
     <div className="items-container">
       <h1>b r o w s e</h1>
       <>
-      <FilterBar filters={filters} setFilters={setFilters} />
+      <FilterBar filters={filters} setFilters={setFilters}/>
         {items.length === 0 ? (
           <p>Nothing here yet! o ~ o</p>
         ): (
@@ -102,8 +114,6 @@ function Items() {
       </>
     </div>
     </div>
-    // )}
-    // </>
   );
 }
 

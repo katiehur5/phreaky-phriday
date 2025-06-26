@@ -16,6 +16,7 @@
   position: relative;
   max-width: 160px;
   text-align: center;
+  transition: max-height 0.4s ease, padding 0.3s ease;
 }
 
 .dropdown-header {

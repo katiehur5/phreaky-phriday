@@ -1,6 +1,7 @@
 import React from 'react';
 import Masonry from 'react-masonry-css';
 import '../styles/MasonryGrid.css';
+import { Link } from 'react-router-dom';
 
 const ProfileMasonryGrid = ({ items, onDelete }) => {
   const breakpointColumnsObj = {
@@ -18,19 +19,21 @@ const ProfileMasonryGrid = ({ items, onDelete }) => {
       columnClassName="masonry-grid_column"
     >
       {items.map(item => (
-        <div className="masonry-card" key={item._id}>
-          <img 
-            src={item.imagePath} 
-            alt={item.name} 
-            className="masonry-img" 
-          />
-          <div className="masonry-info">
-            <h3>{item.name}</h3>
-            <button onClick={() => onDelete(item._id)} className="delete-button">
-              remove
-            </button>
+        <Link to={`/items/${item._id}`} key={item._id}>
+          <div className="masonry-card" key={item._id}>
+            <img 
+              src={item.imagePath} 
+              alt={item.name} 
+              className="masonry-img" 
+            />
+            <div className="masonry-info">
+              <h3>{item.name}</h3>
+              <button onClick={() => onDelete(item._id)} className="delete-button">
+                remove
+              </button>
+            </div>
           </div>
-        </div>
+        </Link>
       ))}
     </Masonry>
   );
