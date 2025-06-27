@@ -48,6 +48,26 @@ function Profile() {
     }
     };
 
+    const toggleAvailability = async (itemId) => {
+    try {
+      const response = await API.put(`/api/items/${itemId}/toggle-availability`);
+      setUser(prevUser => ({
+        ...prevUser,
+        items: prevUser.items.map(item =>
+          item._id === itemId ? { ...item, isAvailable: response.data.isAvailable } : item
+        ),
+        }));
+      // setItems((prevItems) =>
+      //   prevItems.map(item =>
+      //     item._id === itemId ? { ...item, isAvailable: response.data.isAvailable } : item
+      //   )
+      // );
+      // navigate('/items');
+    } catch (error) {
+      console.error('Error toggling availability:', error);
+    }
+  };
+
   return (
     <div className="profile-wrapper">
         <Navbar />
@@ -66,7 +86,7 @@ function Profile() {
       <p>Digits: {user.phoneNumber}</p> */}
       <div className="profile-items">
         {user.items?.length ? (
-          <ProfileMasonryGrid items={user.items} onDelete={handleDelete} />
+          <ProfileMasonryGrid items={user.items} onToggleAvailability={toggleAvailability} onDelete={handleDelete} />
         ) : (
           <p>Where your clothes at? ಠ_ಠ</p>
         )}

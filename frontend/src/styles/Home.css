@@ -83,6 +83,7 @@
 }
 
 .home-container {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -112,4 +113,34 @@
   margin-top: .5rem;
   margin-bottom: 3rem;
   object-fit: cover;
+}
+
+.parallax {
+  position: absolute;
+  z-index: 1;
+  will-change: transform;
+}
+
+.parallax-heart {
+  top: 0vh;
+  left: 0vw;
+  width: 400px;
+  max-width: 80vw;
+}
+.parallax-heart img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.parallax-555 {
+  top: 0vh;
+  right: 0vw;
+  width: 350px;
+  max-width: 80vw;
+}
+.parallax-555 img {
+  width: 100%;
+  height: auto;
+  display: block;
 }

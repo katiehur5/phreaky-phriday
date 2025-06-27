@@ -17,10 +17,10 @@ function Items() {
   });
   const [likedItems, setLikedItems] = useState([]);
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
   const fetchItems = async() => {
-    setLoading(true);
+    // setLoading(true);
     try {
         const params = new URLSearchParams();
         for (const key in filters) {
@@ -36,8 +36,6 @@ function Items() {
           .map(i => i._id));
     } catch (error) {
       console.error('Error fetching items:', error);
-    } finally {
-      setLoading(false);
     }
   }
 
@@ -68,6 +66,7 @@ function Items() {
 
   const handleLike = async (id) => {
     const token = localStorage.getItem('token');
+    // const userId = localStorage.getItem('userId');
     if (!token) {
       alert('Please log in to like items.');
       navigate('/login');

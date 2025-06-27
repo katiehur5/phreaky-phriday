@@ -62,8 +62,8 @@ router.post('/:id/like', authenticate, async (req, res) => {
   }
 
   await item.save();
-  res.json({ item });
-  res.status(200).json({ likes: item.likes.length });
+  // res.json({ item });
+  res.status(200).json({ item, likes: item.likes.length });
 });
 
 // GET /api/items - Retrieve all items
@@ -131,7 +131,6 @@ router.delete('/:id', authenticate, async (req,res) => {
 
 // PUT /api/items/:id/toggle-availability - mark item availability by ID
 router.put('/:id/toggle-availability', authenticate, async (req, res) => {
-  console.log('Toggle availability route hit');
 
   try {
     const item = await Item.findById(req.params.id);

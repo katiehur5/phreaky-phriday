@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Home.css';
 import Navbar from '../components/Navbar';
 import MarqueeSection from '../components/MarqueeSection';
 
 const Home = () => {
+  const [offsetY, setOffsetY] = useState(0);
+
   const userId = localStorage.getItem('userId');
+
+  useEffect(() => {
+    const handleScroll = () => setOffsetY(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <div className="home-wrapper">
@@ -28,6 +37,12 @@ const Home = () => {
       {/* </section> */}
 
       <section className="home-container">
+        <div
+          className="parallax parallax-heart"
+          style={{ transform: `translateY(${offsetY * 0.3}px)` }}
+        >
+          <img src="/parallax/hearttext.png" alt="home is where the heart is" />
+        </div>
         <div className="polaroid-card">
           <img
             src='/home_marquee/aphimerch.JPEG'
@@ -37,7 +52,14 @@ const Home = () => {
           <Link to="/items" className="home-link">browse items</Link>
         </div>
       </section>
+
       <section className="home-container">
+        <div
+          className="parallax parallax-555"
+          style={{ transform: `translateY(${offsetY * 0.15}px)` }}
+        >
+          <img src="/parallax/555.png" alt="555" />
+        </div>
         <div className="polaroid-card">
           <img
             src='/home_marquee/sparklers.jpg'

@@ -3,7 +3,7 @@ import Masonry from 'react-masonry-css';
 import '../styles/MasonryGrid.css';
 import { Link } from 'react-router-dom';
 
-const ProfileMasonryGrid = ({ items, onDelete }) => {
+const ProfileMasonryGrid = ({ items, onToggleAvailability, onDelete }) => {
   const breakpointColumnsObj = {
     default: 3,
     900: 2,
@@ -20,7 +20,10 @@ const ProfileMasonryGrid = ({ items, onDelete }) => {
     >
       {items.map(item => (
         <Link to={`/items/${item._id}`} key={item._id}>
-          <div className="masonry-card" key={item._id}>
+          <div className={`masonry-card ${item.isAvailable ? '' : 'unavailable'}`}>
+            {!item.isAvailable && (
+              <div className="unavailable-overlay">Temporarily Unavailable</div>
+            )}
             <img 
               src={item.imagePath} 
               alt={item.name} 
@@ -28,7 +31,22 @@ const ProfileMasonryGrid = ({ items, onDelete }) => {
             />
             <div className="masonry-info">
               <h3>{item.name}</h3>
-              <button onClick={() => onDelete(item._id)} className="delete-button">
+              <button
+                className="delete-button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onToggleAvailability(item._id);
+                }}
+              >
+                {item.isAvailable ? 'mark unavailable' : 'mark available'}
+              </button>
+              <button 
+                className="delete-button"
+                onClick={(e) =>  {
+                  e.preventDefault();
+                  onDelete(item._id);
+                }}
+              >
                 remove
               </button>
             </div>
