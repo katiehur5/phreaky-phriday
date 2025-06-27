@@ -80,14 +80,19 @@ router.post('/login', async (req, res) => {
     
     const user = await User.findOne({ email: lowerEmail });
 
-    console.log("Found user:", user);
+    // console.log("Found user:", user);
     if (user) {
       const match = await bcrypt.compare(password, user.password);
-      console.log("Password match?", match);
+      // console.log("Password match?", match);
     }
 
-    if (!user || !(await bcrypt.compare(password, user.password))) {
-      return res.status(401).json({ error: 'Invalid credentials' });
+    // if (!user || !(await bcrypt.compare(password, user.password))) {
+    //   return res.status(401).json({ error: 'Invalid credentials' });
+    // }
+    if (!user) {
+      return res.status(401).json({ error : 'Invalid email' });
+    } else if (!(await bcrypt.compare(password, user.password))) {
+      return res.status(401).json({ error : 'Invalid password' });
     }
 
     const token = generateToken(user);

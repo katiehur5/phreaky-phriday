@@ -79,7 +79,28 @@ const Home = () => {
           <Link to={`/profile/${userId}`} className="home-link">your profile</Link>
         </div>
       </section>
+      {/* Bottom */}
+      <section className="about">
+        <div className="girl-wrapper">
+          <img
+            src='/catalinacoff.png'
+            alt="coffee drinker"
+            className="about-girl"
+          />
+        </div>
+          <h3>about phreaky phriday</h3>
+          A nonstop closet rotation among your closest friends, designed to collectivize closets, 
+          <br></br>
+          foster feminism, and reinforce reciprocity among women.
+          <br></br>
+          <br></br>
+          with love,
+          <br></br>
+          Katie Hur
+      </section>
     </div>
+
+    
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import API from '../api';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Login.css'; // Import styles
@@ -8,6 +8,13 @@ function Login() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  useEffect(() => {
+    console.log('Login component mounted');
+    return () => {
+      console.log('Login component unmounted');
+    };
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -16,7 +23,7 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(''); // Clear any previous errors
+    // setError(''); // Clear any previous errors
     
     try {
       const response = await API.post('/api/auth/login', formData);
@@ -31,9 +38,9 @@ function Login() {
       if (error.response) {
         // Handle specific error messages from the backend
         const errorMessage = error.response.data.error;
-        if (errorMessage === 'User not found') {
+        if (errorMessage === 'Invalid email') {
           setError("Couldn't find account that matches email");
-        } else if (errorMessage === 'Invalid credentials') {
+        } else if (errorMessage === 'Invalid password') {
           setError('Incorrect password');
         } else {
           setError(errorMessage || 'An error occurred during login');
@@ -59,7 +66,8 @@ function Login() {
           placeholder="Email"
           autoComplete="off"
           value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value.toLowerCase() })}
+          // onChange={(e) => setFormData({ ...formData, email: e.target.value.toLowerCase() })}
+          onChange={handleChange}
           required
         />
         <input
@@ -71,7 +79,7 @@ function Login() {
           onChange={handleChange}
           required
         />
-        <button type="submit">Login</button>
+        <button type="submit">Log In</button>
       </form>
     </div>
   );

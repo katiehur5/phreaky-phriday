@@ -84,7 +84,7 @@
   padding: 6px 12px;
   font-size: 0.9rem;
   cursor: pointer;
-  margin: 1px;
+  margin: 3px;
 }
 .delete-button:hover {
   background-color: #ffcccc;

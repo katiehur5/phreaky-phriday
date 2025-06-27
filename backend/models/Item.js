@@ -27,7 +27,7 @@ const ItemSchema = new mongoose.Schema({
   },    
   size: { 
     type: String,
-    required: true,
+    required: false,
     default: undefined, 
   },                                       
   swapType: { 

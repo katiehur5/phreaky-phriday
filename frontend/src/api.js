@@ -25,11 +25,13 @@ API.interceptors.request.use(
 API.interceptors.response.use(
   response => response,
   error => {
-    if (error.response?.status === 401) {
-      // Clear invalid token
+    if (
+      error.response?.status === 401 &&
+      localStorage.getItem('token') && // Only redirect if token exists
+      window.location.pathname !== '/login' // Don't redirect if already on login
+    ) {
       localStorage.removeItem('token');
       localStorage.removeItem('userId');
-      // Redirect to login page
       window.location.href = '/login';
     }
     return Promise.reject(error);
