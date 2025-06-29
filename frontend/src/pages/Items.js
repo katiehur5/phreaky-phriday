@@ -43,10 +43,10 @@ function Items() {
     fetchItems();
   }, [filters]);
 
-
+  
   const handleDelete = async (id) => {
-    const confirmDelete = window.confirm('Are you sure you want to delete this item?');
-    if (!confirmDelete) return;
+    // const confirmDelete = window.confirm('Are you sure you want to delete this item?');
+    // if (!confirmDelete) return;
 
     const token = localStorage.getItem('token');
 
