@@ -27,8 +27,7 @@ router.post('/register', async (req, res) => {
       email: lowerEmail, 
       password, 
       phoneNumber, 
-      classYear, 
-      items: [] 
+      classYear
     });
     await user.save();
     res.status(201).json({ message: 'User registered successfully!', user });
@@ -55,7 +54,7 @@ router.post('/register', async (req, res) => {
 // GET /api/users/:id - Get user by ID and their items
 router.get('/:id', async (req, res) => {
   try {
-    const user = await User.findById(req.params.id).populate('itemCount');
+    const user = await User.findById(req.params.id);
     if (!user) return res.status(404).json({ error: 'User not found' });
 
     const items = await Item.find({ owner: user._id });
@@ -67,6 +66,7 @@ router.get('/:id', async (req, res) => {
       phoneNumber: user.phoneNumber,
       classYear: user.classYear,
       items: items,
+      itemCount: items.length,
     });
   } catch (err) {
     console.error('Error fetching user:', {

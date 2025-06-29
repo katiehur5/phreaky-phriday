@@ -7,7 +7,7 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true },
   phoneNumber: { type: String },
   classYear: { type: String },
-  items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item', default: [] }]
+  // items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item', default: [] }]
 });
 
 // Hash password before saving
