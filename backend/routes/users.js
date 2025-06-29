@@ -57,7 +57,7 @@ router.get('/:id', async (req, res) => {
     const user = await User.findById(req.params.id);
     if (!user) return res.status(404).json({ error: 'User not found' });
 
-    const items = await Item.find({ owner: user._id });
+    const items = await Item.find({ owner: user._id }).populate('owner', 'name email phoneNumber');
 
     res.status(200).json({
       _id: user._id,

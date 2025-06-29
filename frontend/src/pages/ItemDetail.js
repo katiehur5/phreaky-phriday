@@ -63,7 +63,11 @@ function ItemDetail() {
             <p><strong>Price:</strong> ${item.price}</p>
           )}
           <br></br>
-          <p><strong>Owner:</strong> {item.owner?.name}</p>
+          <p><strong>Owner:</strong>{' '}
+            <a className="contact-link" href={`/profile/${item.owner?._id}`}>
+                {item.owner?.name}
+            </a>
+          </p>
           <p><strong>Email:</strong>{' '}
             <a className="contact-link" href={`mailto:${item.owner?.email}?subject=${encodeURIComponent(`Interested in ${item.name}`)}`}>
                 {item.owner?.email}
