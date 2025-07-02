@@ -149,5 +149,47 @@ router.put('/:id/toggle-availability', authenticate, async (req, res) => {
   }
 });
 
+// PUT /api/items/:id - Update item details
+router.put('/:id', authenticate, upload.fields([
+  { name: 'image', maxCount: 1 },
+  { name: 'additionalImages', maxCount: 3 }
+]), async (req, res) => {
+  try {
+    const item = await Item.findById(req.params.id);
+    if (!item) return res.status(404).json({ message: 'Item not found' });
+
+    // Only the owner can edit
+    if (item.owner.toString() !== req.user.id) {
+      return res.status(403).json({ message: 'Unauthorized' });
+    }
+
+    const updatableFields = [
+      'name', 'description', 'category', 'subcategory',
+      'condition', 'size', 'swapType', 'washInstructions', 'price'
+    ];
+
+    updatableFields.forEach(field => {
+      if (req.body[field] !== undefined) {
+        item[field] = req.body[field];
+      }
+    });
+
+    // Handle images
+    if (req.files['image']) {
+      item.imagePath = req.files['image'][0].path;
+    }
+
+    if (req.files['additionalImages']) {
+      item.additionalImages = req.files['additionalImages'].map(file => file.path);
+    }
+
+    await item.save();
+    res.status(200).json({ message: 'Item updated', item });
+
+  } catch (error) {
+    console.error('Error updating item:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
 
 module.exports = router;
