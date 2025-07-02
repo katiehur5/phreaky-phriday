@@ -165,3 +165,33 @@ button:hover {
   border-radius: 12px;
   /* margin-top: 10px;  */
 }
+
+.edit-item-form {
+  padding: 0;
+  margin: 0;
+  max-width: 100%;
+}
+
+.cancel-row {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  align-items: end;
+}
+
+.cancel-btn {
+  cursor: pointer;
+  background: none;
+  border: none;
+  box-sizing: border-box;
+  padding: 0;
+  transition: transform 0.2s ease;
+  font-family: 'Open Sans', sans-serif;
+  text-decoration: underline;
+  color: #333;
+  transition: color 0.2s ease;
+}
+.cancel-btn:hover {
+  color: #ff69b4;
+}

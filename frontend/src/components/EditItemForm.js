@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import API from '../api';
 import '../styles/AddItem.css'; // reuse existing styles
 
-function EditItemForm({ item, onSave }) {
+function EditItemForm({ item, onSave, onCancel }) {
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -88,6 +88,11 @@ function EditItemForm({ item, onSave }) {
 
   return (
     <form onSubmit={handleSubmit} className="edit-item-form">
+      <span className="cancel-row">
+        <div onClick={onCancel} className="cancel-btn">
+          cancel
+        </div>
+      </span>
       <h2>Edit Item</h2>
 
       <label className="upload-prompt" htmlFor="imageUpload">+ Replace main photo</label>

@@ -7,11 +7,13 @@ import Slider from "react-slick";
 import { CustomNextArrow, CustomPrevArrow } from "../components/CustomArrows";
 import EditItemForm from '../components/EditItemForm';
 import { MdEdit } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
 
 function ItemDetail() {
   const { id } = useParams();
   const [item, setItem] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
+  const navigate = useNavigate();
 
   async function fetchItem() {
       try {
@@ -38,6 +40,11 @@ function ItemDetail() {
     <div className="item-detail-wrapper">
       <Navbar />
       <div className="item-detail-content">
+        <div className="back-row">
+          <div onClick={() => navigate('/items')} className="back-btn">
+            back
+          </div>
+        </div>
       <div className="item-detail-card">
         <Slider 
           dots={images.length > 1} infinite={images.length > 1} speed={500} slidesToShow={1} slidesToScroll={1} className="item-carousel"
@@ -74,6 +81,9 @@ function ItemDetail() {
               onSave={() => {
                 fetchItem();    // refresh item
                 setIsEditing(false); // exit edit mode
+              }}
+              onCancel={() => {
+                setIsEditing(false);
               }}
             />
           ) : (
