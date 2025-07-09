@@ -5,6 +5,7 @@ import LandingPage from './pages/LandingPage';
 import Home from './pages/Home';
 import Items from './pages/Items';
 import Register from './pages/Register';
+import EnterCloset from './pages/EnterCloset';
 import Login from './pages/Login';
 import PrivateRoute from './components/PrivateRoute';
 import AddItem from './pages/AddItem';
@@ -36,6 +37,7 @@ function App() {
             element={<Items />} />
         }/>
         <Route path="/register" element={<Register />} />
+        <Route path="/enter" element={<EnterCloset />} />
         <Route path="/login" element={<Login />} />
         <Route path="/add-item" element={
           <PrivateRoute 
