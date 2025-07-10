@@ -20,11 +20,11 @@ function Register() {
     setFormData({ ...formData, [name]: value });
     setError(''); // Clear error when user types
 
-    // Validate Yale email as user types
+    // Validate email as user types
     if (name === 'email') {
-      const isYaleEmail = /^[a-zA-Z0-9._%+-]+@yale\.edu$/.test(value);
-      if (!isYaleEmail && value) {
-        setError('Please register with Yale email');
+      const isEmail = /^\S+@\S+\.\S+$/.test(value);
+      if (!isEmail && value) {
+        setError('Please enter valid email');
       } else {
         setError('');
       }
@@ -35,8 +35,8 @@ function Register() {
     e.preventDefault();
     
     // Final validation before submission
-    const isYaleEmail = /^[a-zA-Z0-9._%+-]+@yale\.edu$/.test(formData.email);
-    if (!isYaleEmail) {
+    const isEmail = /^\S+@\S+\.\S+$/.test(formData.email);
+    if (!isEmail) {
       setError('Please register with Yale email');
       return;
     }
@@ -54,8 +54,8 @@ function Register() {
         if (error.response.status === 409 || 
             (error.response.data.error && error.response.data.error.includes('already registered'))) {
           setError('An account with this email already exists. Try logging in instead.');
-        } else if (error.response.data.error === 'Email must be a Yale address.') {
-          setError('Please register with Yale email');
+        } else if (error.response.data.error === 'Enter valid email.') {
+          setError('Please register with valid email');
         } else {
           setError(error.response.data.error || 'Registration failed. Please try again.');
         }
@@ -90,7 +90,7 @@ function Register() {
         <input 
           type="email" 
           name="email" 
-          placeholder="Email" 
+          placeholder="Preferred Email" 
           autoComplete="off" 
           value={formData.email} 
           onChange={handleChange} 

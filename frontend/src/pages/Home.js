@@ -81,13 +81,13 @@ const Home = () => {
       </section>
       {/* Bottom */}
       <section className="about">
-        <div className="girl-wrapper">
+        {/* <div className="girl-wrapper">
           <img
             src='/catalinacoff.png'
             alt="coffee drinker"
             className="about-girl"
           />
-        </div>
+        </div> */}
           <h3>about phreaky phriday</h3>
           A nonstop closet rotation among your closest friends, designed to collectivize closets, 
           <br></br>

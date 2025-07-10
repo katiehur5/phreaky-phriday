@@ -149,6 +149,7 @@ router.put('/:id/toggle-availability', authenticate, async (req, res) => {
   }
 });
 
+
 // PUT /api/items/:id - Update item details
 router.put('/:id', authenticate, upload.fields([
   { name: 'image', maxCount: 1 },

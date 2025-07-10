@@ -37,7 +37,7 @@ h1, h2, h3 {
 }
 
 p, input, textarea, button {
-  font-family: 'Open Sans', sans-serif; /* Use a readable sans-serif for content */
+  font-family: 'Roboto', sans-serif; /* Use a readable sans-serif for content */
 }
 
 nav {

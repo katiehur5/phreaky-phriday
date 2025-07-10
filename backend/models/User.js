@@ -8,6 +8,18 @@ const UserSchema = new mongoose.Schema({
   phoneNumber: { type: String },
   classYear: { type: String },
   // items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item', default: [] }]
+
+  // other contacts
+  insta: { type: String },
+  snapchat: { type: String },
+  pinterest: { type: String },
+  whatsapp: { type: String },
+  residence: { type: String },
+  venmo: { type: String },
+
+  // other info
+  style: { type: String },
+  influencer: { type: String },
 });
 
 // Hash password before saving

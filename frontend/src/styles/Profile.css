@@ -71,3 +71,24 @@
   outline: 2px dashed #ccc;
   outline-offset: 2px;
 }
+
+/* for editin */
+.edit-row {
+  position: relative;
+  display: flex;
+  flex-direction:column;
+  height: auto;
+  align-items: end;
+}
+
+.edit-btn {
+  cursor: pointer;
+  background: none;
+  border: none;
+  box-sizing: border-box;
+  padding: 0;
+  transition: transform 0.2s ease;
+}
+.edit-btn:hover {
+  transform: scale(1.3);
+}

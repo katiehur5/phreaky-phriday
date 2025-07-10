@@ -11,6 +11,7 @@ import PrivateRoute from './components/PrivateRoute';
 import AddItem from './pages/AddItem';
 import Profile from './pages/Profile';
 import ItemDetail from './pages/ItemDetail';
+import ScrollToTop from './components/ScrollToTop';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 
@@ -19,6 +20,7 @@ function App() {
   return (
     <>
     <Router>
+      <ScrollToTop />
       {/* <nav>
         <Link to="/">HOME</Link>
         <Link to="/items">BROWSE</Link>

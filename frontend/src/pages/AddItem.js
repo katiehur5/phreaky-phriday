@@ -21,7 +21,23 @@ function AddItem() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    if (name === 'size') {
+      if (value.toLowerCase() === 'small') {
+        setFormData({ ...formData, [name]: 'S' });
+      }
+      else if (value.toLowerCase() === 'medium') {
+        setFormData({ ...formData, [name]: 'M' });
+      }
+      else if (value.toLowerCase() === 'large') {
+        setFormData({ ...formData, [name]: 'L' });
+      }
+      else {
+        setFormData({ ...formData, [name]: value });
+      }
+    }
+    else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const handleImageUpload = (e) => {
@@ -66,7 +82,9 @@ function AddItem() {
       form.append('category', formData.category);
       if (formData.subcategory) { form.append('subcategory', formData.subcategory); }
       if (formData.condition) { form.append('condition', formData.condition); }
-      if (formData.size) { form.append('size', formData.size); }
+      if (formData.size) { 
+        form.append('size', formData.size); 
+      }
       if (formData.swapType) { form.append('swapType', formData.swapType); }
 
       if (formData.swapType === 'borrow me') {
@@ -85,8 +103,8 @@ function AddItem() {
         },
       });
 
-      alert('Item added successfully!');
-      navigate('/items'); // Redirect to item listings
+      // alert('Item added successfully!');
+      navigate('/profile'); // Redirect to item listings
     } catch (error) {
       console.error('Error adding item:', error);
       alert('Failed to add item.');

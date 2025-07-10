@@ -57,6 +57,8 @@ function EnterCloset() {
       <div className="enter-box">
         <h2 className="prompt">
           ALETHIA&nbsp;
+          {/* ALETHIA */}
+          <span className="letter-group">
           {letters.map((letter, idx) => (
             <input
               key={idx}
@@ -69,7 +71,9 @@ function EnterCloset() {
               ref={(el) => inputsRef.current[idx] = el}
             />
           ))}
+          </span>
           &nbsp;ETERONIS
+          {/* ETERONIS */}
         </h2>
         {error && <p className="error-message">{error}</p>}
       </div>

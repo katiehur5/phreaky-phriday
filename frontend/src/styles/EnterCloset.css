@@ -4,7 +4,7 @@
   100% { background-position: 0% 50%; }
 }
 
-h2 {
+.enter-box h2 {
     font-family: "Lexend Giga", sans-serif;
 }
 
@@ -30,13 +30,17 @@ h2 {
   text-align: center;
   animation: fadeIn 1.5s ease-in;
   transition: all 0.3s ease;
+  max-width: 90vw;
 }
 
 .prompt {
   font-size: 1.8rem;
+  /* white-space: nowrap; */
   margin-bottom: 30px;
   color: #999;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  font-size: clamp(1.2rem, 5vw, 2rem);
+  text-align: center;
 }
 
 .blank {
@@ -47,7 +51,7 @@ h2 {
 .enter-box input {
   /* width: 200px; */
   /* padding: 0px !important; */
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   text-align: center;
   border: none;
   border-radius: 12px;
@@ -80,12 +84,18 @@ h2 {
   to   { opacity: 1; transform: translateY(0); }
 }
 
+.letter-group {
+  display: inline-flex;
+  white-space: nowrap;
+  /* gap: 0.4em; */
+}
+
 .inline-letter {
-    width: 30px;
-    height: 40px;
+    width: 2rem;
+    height: 3rem;
     margin: 0 4px;
     padding: 0;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     font-family: "Lexend Giga", sans-serif;
     text-align: center;
     /* border: none; */

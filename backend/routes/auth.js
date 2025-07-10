@@ -19,11 +19,14 @@ router.post('/register', async (req, res) => {
     const { name, phoneNumber, email, password, classYear } = req.body;
     const lowerEmail = email.toLowerCase();
 
-    // Enforce Yale email
-    const yaleEmailRegex = /^[a-zA-Z0-9._%+-]+@yale\.edu$/;
-    if (!yaleEmailRegex.test(lowerEmail)) {
+    // Enforce valid email
+    // const yaleEmailRegex = /^[a-zA-Z0-9._%+-]+@yale\.edu$/;
+    const emailRegex = /^\S+@\S+\.\S+$/;
+
+    if (!emailRegex.test(lowerEmail)) {
       // alert('Email must be a Yale address.');
-      return res.status(422).json({ error: 'Email must be a Yale address.' });
+      alert('Enter valid email.');
+      return res.status(422).json({ error: 'Enter valid email.' });
     }
 
     // check for existing user

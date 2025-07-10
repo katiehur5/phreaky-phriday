@@ -5,32 +5,35 @@ import '../styles/Profile.css';
 import Navbar from '../components/Navbar';
 import MasonryGrid from '../components/MasonryGrid';
 import { useNavigate } from 'react-router-dom';
+import EditProfileForm from '../components/EditProfileForm';
+import { MdEdit } from "react-icons/md";
 
 function Profile() {
   const { userId } = useParams();
   const [user, setUser] = useState(null);
+  const currentUserId = localStorage.getItem('userId');
   const [likedItems, setLikedItems] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    async function fetchUser() {
-      try {
-        const res = await API.get(`/api/users/${userId}`);
-        setUser(res.data);
-        
-        // Set liked items based on the current user's likes
-        const currentUserId = localStorage.getItem('userId');
-        if (currentUserId) {
-          setLikedItems(res.data.items
-            .filter(item => item.likes.some(like => like.toString() === currentUserId))
-            .map(item => item._id)
-          );
-        }
-      } catch (err) {
-        console.error('Failed to fetch user', err);
+  async function fetchUser() {
+    try {
+      const res = await API.get(`/api/users/${userId}`);
+      setUser(res.data);
+      
+      // Set liked items based on the current user's likes
+      if (currentUserId) {
+        setLikedItems(res.data.items
+          .filter(item => item.likes.some(like => like.toString() === currentUserId))
+          .map(item => item._id)
+        );
       }
+    } catch (err) {
+      console.error('Failed to fetch user', err);
     }
-
+  };
+  
+  useEffect(() => {
     fetchUser();
   }, [userId]);
 
@@ -108,20 +111,80 @@ function Profile() {
     }
   };
 
+  const isOwner = currentUserId === userId.toString();
+
   return (
     <div className="profile-wrapper">
         <Navbar />
     <div className="profile-container">
-      <h1>{user.name}'s Closet ({ user.itemCount || 0 })</h1>
-      <p><strong>Email:</strong>{' '}
-        <a className="contact-link" href={`mailto:${user.email}`}>
-            {user.email}
-        </a>
-      </p>
-      <p><strong>Digits:</strong>{' '}
-        <a className="contact-link" href={`sms:${user.phoneNumber}`}>
-          {user.phoneNumber}</a>
-      </p>
+      <h1>{user.name}'s closet ({ user.itemCount || 0 })</h1>
+
+      {/* not in edit mode */}
+      {isOwner && !isEditing && (
+        <span
+          className="edit-row">
+          <div
+            onClick={() => setIsEditing(true)} 
+            className="edit-btn">
+            <MdEdit />
+          </div>
+        </span>
+      )}
+
+      {/* in edit mode */}
+      {isEditing ? (
+        <EditProfileForm
+          user={user}
+          onSave={() => {
+            fetchUser();    // refresh item
+            setIsEditing(false); // exit edit mode
+          }}
+          onCancel={() => {
+            setIsEditing(false);
+          }}
+        />
+      ) : (
+      <>
+        <p><strong>Email:</strong>{' '}
+          <a className="contact-link" href={`mailto:${user.email}`}>
+              {user.email}
+          </a>
+        </p>
+        <p><strong>Digits:</strong>{' '}
+          <a className="contact-link" href={`sms:${user.phoneNumber}`}>
+            {user.phoneNumber}</a>
+        </p>
+
+        {user.classYear && <p><strong>Class Year:</strong>{' '}
+          {user.classYear}
+        </p>}
+
+        {user.residence && <p><strong>Residence:</strong>{' '}
+          {user.residence}
+        </p>}
+
+        {user.insta && <p><strong>Insta: </strong>
+          <a className="contact-link" href={`https://www.instagram.com/${user.insta.replace("@","")}`} target="_blank">
+            {user.insta}</a>
+        </p>}
+        {user.snapchat && <p><strong>Snap: </strong>
+          <a className="contact-link" href={`https://www.snapchat.com/@${user.snapchat.replace("@","")}`} target="_blank">
+            {user.snapchat}</a>
+        </p>}
+        {user.pinterest && <p><strong>Pinterest: </strong>
+          <a className="contact-link" href={`https://www.pinterest.com/${user.pinterest.replace("@","")}`} target="_blank">
+            {user.pinterest}</a>
+        </p>}
+        {user.venmo && <p><strong>Venmo:</strong>{' '}
+          <a className="contact-link" href={`https://venmo.com/${user.venmo.replace("@","")}`} target="_blank" >
+            {user.venmo}</a>
+        </p>}
+
+        {user.style && <p><strong>Style: </strong>{user.style}</p>}
+        {user.influencer && <p><strong>Fav influencer: </strong>{user.influencer}</p>}
+      </>
+      )}
+
       <div className="profile-items">
         {user.items?.length ? (
           <MasonryGrid 
