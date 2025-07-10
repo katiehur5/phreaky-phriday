@@ -74,6 +74,7 @@ function EditProfileForm({ user, onSave, onCancel }) {
         </div>
       </span>
       <h2>Edit Profile</h2>
+      <p>Place a * next to preferred contact methods</p>
       <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Name" required />
       <input type="text" name="email" value={formData.email} onChange={handleChange} placeholder="Preferred Email" />
       <input type="text" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} placeholder="Digits" />

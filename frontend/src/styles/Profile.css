@@ -10,6 +10,7 @@
   font-size: 2.5rem;
   margin-bottom: 1rem;
   color: #333;
+  align-self: center;
 }
 
 .profile-container p {
@@ -17,6 +18,35 @@
   font-size: 1rem;
   margin-bottom: 1rem;
 }
+
+.profile-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.profile-info p {
+  /* font-family: "Reenie Beanie", cursive;
+  font-weight: 400; */
+  font-style: normal;
+}
+
+.profile-pill {
+  background: white;
+  border-radius: 10px;
+  align-items: center;
+  text-align: start;
+  align-content: center;
+  padding: 10px;
+  margin: 10px;
+  width: 33%;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: all 2s ease;
+}
+/* .profile-pill:hover {
+  background: linear-gradient(-45deg, #f5d6d6, #f5e5d6, #f5f5d6, #e5f5d6, #d6f5d6, #d6f5e5, #d6f0f5, #d6e5f5, #d6d6f5, #e5d6f5, #f5d6f5, #f5d6e5, #f5d6d6);
+} */
 
 .profile-items {
   display: grid;
@@ -72,7 +102,15 @@
   outline-offset: 2px;
 }
 
-/* for editin */
+.preferred-contact {
+  color: #4916f0 !important;
+  font-weight: 800 !important;
+}
+.preferred-contact:hover {
+  color: #ff1a8c !important;
+}
+
+/* for editing */
 .edit-row {
   position: relative;
   display: flex;

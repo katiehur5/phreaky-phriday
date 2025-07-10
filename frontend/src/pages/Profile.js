@@ -117,73 +117,83 @@ function Profile() {
     <div className="profile-wrapper">
         <Navbar />
     <div className="profile-container">
+
       <h1>{user.name}'s closet ({ user.itemCount || 0 })</h1>
+        {/* not in edit mode */}
+        {isOwner && !isEditing && (
+          <span
+            className="edit-row">
+            <div
+              onClick={() => setIsEditing(true)} 
+              className="edit-btn">
+              <MdEdit />
+            </div>
+          </span>
+        )}
 
-      {/* not in edit mode */}
-      {isOwner && !isEditing && (
-        <span
-          className="edit-row">
-          <div
-            onClick={() => setIsEditing(true)} 
-            className="edit-btn">
-            <MdEdit />
+        {/* in edit mode */}
+        {isEditing ? (
+          <EditProfileForm
+            user={user}
+            onSave={() => {
+              fetchUser();    // refresh item
+              setIsEditing(false); // exit edit mode
+            }}
+            onCancel={() => {
+              setIsEditing(false);
+            }}
+          />
+        ) : (
+          <div className="profile-info">
+            <div className="profile-pill">
+              <p><strong>Email:</strong>{' '}
+                <a className={`contact-link${user.email && user.email.includes('*') ? ' preferred-contact' : ''}`} href={`mailto:${user.email}`}>
+                    {user.email}
+                </a>
+              </p>
+              <p><strong>Digits:</strong>{' '}
+                <a className={`contact-link${user.phoneNumber && user.phoneNumber.includes('*') ? ' preferred-contact' : ''}`} href={`sms:${user.phoneNumber}`}>
+                  {user.phoneNumber}</a>
+              </p>
+
+              {user.classYear && <p><strong>Class Year:</strong>{' '}
+                {user.classYear}
+              </p>}
+
+              {user.residence && <p><strong>Addy:</strong>{' '}
+                {user.residence}
+              </p>}
+            </div>
+
+            <div className="profile-pill">
+              {user.insta && <p><strong>Insta: </strong>
+                <a 
+                  className={`contact-link${user.insta && user.insta.includes('*') ? ' preferred-contact' : ''}`} 
+                  href={`https://www.instagram.com/${user.insta.replace(/[@*]/g,"")}`} target="_blank" rel="noreferrer">
+                  {user.insta}</a>
+              </p>}
+              {user.snapchat && <p><strong>Snap: </strong>
+                <a 
+                  className={`contact-link${user.snapchat && user.snapchat.includes('*') ? ' preferred-contact' : ''}`} 
+                  href={`https://www.snapchat.com/@${user.snapchat.replace(/[@*]/g,"")}`} target="_blank" rel="noreferrer">
+                  {user.snapchat}</a>
+              </p>}
+              {user.pinterest && <p><strong>Pinterest: </strong>
+                <a className="contact-link" href={`https://www.pinterest.com/${user.pinterest.replace(/[@*]/g,"")}`} target="_blank" rel="noreferrer">
+                  {user.pinterest}</a>
+              </p>}
+              {user.venmo && <p><strong>Venmo:</strong>{' '}
+                <a className="contact-link" href={`https://venmo.com/${user.venmo.replace(/[@*]/g,"")}`} target="_blank" rel="noreferrer">
+                  {user.venmo}</a>
+              </p>}
+            </div>
+            
+            <div className="profile-pill">
+              {user.style && <p><strong>Style: </strong>{user.style}</p>}
+              {user.influencer && <p><strong>Fav influencer: </strong>{user.influencer}</p>}
+            </div>
           </div>
-        </span>
-      )}
-
-      {/* in edit mode */}
-      {isEditing ? (
-        <EditProfileForm
-          user={user}
-          onSave={() => {
-            fetchUser();    // refresh item
-            setIsEditing(false); // exit edit mode
-          }}
-          onCancel={() => {
-            setIsEditing(false);
-          }}
-        />
-      ) : (
-      <>
-        <p><strong>Email:</strong>{' '}
-          <a className="contact-link" href={`mailto:${user.email}`}>
-              {user.email}
-          </a>
-        </p>
-        <p><strong>Digits:</strong>{' '}
-          <a className="contact-link" href={`sms:${user.phoneNumber}`}>
-            {user.phoneNumber}</a>
-        </p>
-
-        {user.classYear && <p><strong>Class Year:</strong>{' '}
-          {user.classYear}
-        </p>}
-
-        {user.residence && <p><strong>Residence:</strong>{' '}
-          {user.residence}
-        </p>}
-
-        {user.insta && <p><strong>Insta: </strong>
-          <a className="contact-link" href={`https://www.instagram.com/${user.insta.replace("@","")}`} target="_blank">
-            {user.insta}</a>
-        </p>}
-        {user.snapchat && <p><strong>Snap: </strong>
-          <a className="contact-link" href={`https://www.snapchat.com/@${user.snapchat.replace("@","")}`} target="_blank">
-            {user.snapchat}</a>
-        </p>}
-        {user.pinterest && <p><strong>Pinterest: </strong>
-          <a className="contact-link" href={`https://www.pinterest.com/${user.pinterest.replace("@","")}`} target="_blank">
-            {user.pinterest}</a>
-        </p>}
-        {user.venmo && <p><strong>Venmo:</strong>{' '}
-          <a className="contact-link" href={`https://venmo.com/${user.venmo.replace("@","")}`} target="_blank" >
-            {user.venmo}</a>
-        </p>}
-
-        {user.style && <p><strong>Style: </strong>{user.style}</p>}
-        {user.influencer && <p><strong>Fav influencer: </strong>{user.influencer}</p>}
-      </>
-      )}
+        )}
 
       <div className="profile-items">
         {user.items?.length ? (

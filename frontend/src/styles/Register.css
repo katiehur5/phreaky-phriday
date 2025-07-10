@@ -1,3 +1,6 @@
+
+
+
 .register-container {
   max-width: 400px;
   margin: auto;
@@ -47,6 +50,13 @@ button:hover {
   padding: 0;
   margin: 0;
   max-width: 100%;
+}
+
+.edit-profile-form h2 {
+  margin: 0;
+}
+.edit-profile-form p {
+  margin: 0;
 }
 
 .cancel-row {
