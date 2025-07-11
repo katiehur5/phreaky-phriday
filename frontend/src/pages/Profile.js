@@ -145,52 +145,76 @@ function Profile() {
           />
         ) : (
           <div className="profile-info">
-            <div className="profile-pill">
-              <p><strong>Email:</strong>{' '}
-                <a className={`contact-link${user.email && user.email.includes('*') ? ' preferred-contact' : ''}`} href={`mailto:${user.email}`}>
-                    {user.email}
-                </a>
-              </p>
-              <p><strong>Digits:</strong>{' '}
-                <a className={`contact-link${user.phoneNumber && user.phoneNumber.includes('*') ? ' preferred-contact' : ''}`} href={`sms:${user.phoneNumber}`}>
-                  {user.phoneNumber}</a>
-              </p>
+            <div className="profile-box">
+              
+              <div className="profile-pill">
+                <p><strong>Email:</strong>{' '}
+                  <a className={`contact-link${user.email && user.email.includes('*') ? ' preferred-contact' : ''}`} href={`mailto:${user.email.replace("*","")}`}>
+                      {user.email}
+                  </a>
+                </p>
+              </div>
 
-              {user.classYear && <p><strong>Class Year:</strong>{' '}
-                {user.classYear}
-              </p>}
+              <div className="profile-pill">
+                <p><strong>Digits:</strong>{' '}
+                  <a className={`contact-link${user.phoneNumber && user.phoneNumber.includes('*') ? ' preferred-contact' : ''}`} href={`sms:${user.phoneNumber.replace("*","")}`}>
+                    {user.phoneNumber}</a>
+                </p>
+              </div>
+              
+              
+                {user.classYear && <div className="profile-pill"><p><strong>Class Year:</strong>{' '}
+                  {user.classYear}
+                </p></div>}
+              
 
-              {user.residence && <p><strong>Addy:</strong>{' '}
-                {user.residence}
-              </p>}
+              
+                {user.residence && <div className="profile-pill"><p><strong>Addy:</strong>{' '}
+                  {user.residence}
+                </p></div>}
+              
             </div>
 
-            <div className="profile-pill">
-              {user.insta && <p><strong>Insta: </strong>
-                <a 
-                  className={`contact-link${user.insta && user.insta.includes('*') ? ' preferred-contact' : ''}`} 
-                  href={`https://www.instagram.com/${user.insta.replace(/[@*]/g,"")}`} target="_blank" rel="noreferrer">
-                  {user.insta}</a>
-              </p>}
-              {user.snapchat && <p><strong>Snap: </strong>
-                <a 
-                  className={`contact-link${user.snapchat && user.snapchat.includes('*') ? ' preferred-contact' : ''}`} 
-                  href={`https://www.snapchat.com/@${user.snapchat.replace(/[@*]/g,"")}`} target="_blank" rel="noreferrer">
-                  {user.snapchat}</a>
-              </p>}
-              {user.pinterest && <p><strong>Pinterest: </strong>
-                <a className="contact-link" href={`https://www.pinterest.com/${user.pinterest.replace(/[@*]/g,"")}`} target="_blank" rel="noreferrer">
-                  {user.pinterest}</a>
-              </p>}
-              {user.venmo && <p><strong>Venmo:</strong>{' '}
-                <a className="contact-link" href={`https://venmo.com/${user.venmo.replace(/[@*]/g,"")}`} target="_blank" rel="noreferrer">
-                  {user.venmo}</a>
-              </p>}
+            <div className="profile-box">
+              
+                {user.insta && <div className="profile-pill"><p><strong>Insta: </strong>
+                  <a 
+                    className={`contact-link${user.insta && user.insta.includes('*') ? ' preferred-contact' : ''}`} 
+                    href={`https://www.instagram.com/${user.insta.replace(/[@*]/g,"")}`} target="_blank" rel="noreferrer">
+                    {user.insta}</a>
+                </p></div>}
+              
+
+              
+                {user.snapchat && <div className="profile-pill"><p><strong>Snap: </strong>
+                  <a 
+                    className={`contact-link${user.snapchat && user.snapchat.includes('*') ? ' preferred-contact' : ''}`} 
+                    href={`https://www.snapchat.com/@${user.snapchat.replace(/[@*]/g,"")}`} target="_blank" rel="noreferrer">
+                    {user.snapchat}</a>
+                </p></div>}
+              
+
+              
+                {user.pinterest && <div className="profile-pill"><p><strong>Pinterest: </strong>
+                  <a className="contact-link" href={`https://www.pinterest.com/${user.pinterest.replace(/[@*]/g,"")}`} target="_blank" rel="noreferrer">
+                    {user.pinterest}</a>
+                </p></div>}
+              
+
+              
+                {user.venmo && <div className="profile-pill"><p><strong>Venmo:</strong>{' '}
+                  <a className="contact-link" href={`https://venmo.com/${user.venmo.replace(/[@*]/g,"")}`} target="_blank" rel="noreferrer">
+                    {user.venmo}</a>
+                </p></div>}
+              
             </div>
             
-            <div className="profile-pill">
-              {user.style && <p><strong>Style: </strong>{user.style}</p>}
-              {user.influencer && <p><strong>Fav influencer: </strong>{user.influencer}</p>}
+            <div className="profile-box">
+
+                {user.style && <div className="profile-pill"><p><strong>Style: </strong>{user.style}</p></div>}
+              
+                {user.influencer && <div className="profile-pill"><p><strong>Fav influencer: </strong>{user.influencer}</p></div>}
+              
             </div>
           </div>
         )}

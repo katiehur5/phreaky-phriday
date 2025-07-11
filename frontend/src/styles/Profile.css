@@ -31,8 +31,10 @@
   font-style: normal;
 }
 
-.profile-pill {
+.profile-box {
   background: white;
+  backdrop-filter: blur(6px);
+  /* filter: grayscale(100%); */
   border-radius: 10px;
   align-items: center;
   text-align: start;
@@ -44,9 +46,15 @@
   cursor: pointer;
   transition: all 2s ease;
 }
-/* .profile-pill:hover {
+
+.profile-pill {
+  background: white;
+  border-radius: 8px;
+  padding: .1rem;
+}
+.profile-pill:hover {
   background: linear-gradient(-45deg, #f5d6d6, #f5e5d6, #f5f5d6, #e5f5d6, #d6f5d6, #d6f5e5, #d6f0f5, #d6e5f5, #d6d6f5, #e5d6f5, #f5d6f5, #f5d6e5, #f5d6d6);
-} */
+}
 
 .profile-items {
   display: grid;
