@@ -12,6 +12,7 @@ import AddItem from './pages/AddItem';
 import Profile from './pages/Profile';
 import ItemDetail from './pages/ItemDetail';
 import ScrollToTop from './components/ScrollToTop';
+import Welcome from './pages/Welcome';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 
@@ -40,6 +41,7 @@ function App() {
         }/>
         <Route path="/register" element={<Register />} />
         <Route path="/enter" element={<EnterCloset />} />
+        <Route path="/welcome" element={<Welcome />} />
         <Route path="/login" element={<Login />} />
         <Route path="/add-item" element={
           <PrivateRoute 

@@ -12,7 +12,7 @@ function EnterCloset() {
     if (letters.join('').length === 4) {
       const word = letters.join('').toUpperCase();
       if (word === 'ORNO') {
-        navigate('/register');
+        navigate('/welcome');
       } else {
         setError("Hint: Truth, Honor, Forever");
       }
