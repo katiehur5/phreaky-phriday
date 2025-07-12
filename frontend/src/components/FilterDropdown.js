@@ -10,7 +10,7 @@ const FilterDropdown = ({ options, selected = [], setSelected }) => {
         } else {
             setSelected([...safeSelected, value]);
         }
-    };
+    }; 
 
     return (
     <div className="dropdown-pill-container">

@@ -8,10 +8,14 @@ const subcategories = ['dress', 'top', 'bottom', 'outerwear'];
 const sizes = ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', '0', '2', '4', '6', '8', '10'];
 
 const FilterBar = ({ filters, setFilters, categoryCounts }) => {
-  const [openFilter, setOpenFilter] = useState(null);
+  const [openFilters, setOpenFilters] = useState([]);
 
   const toggleOpen = (filterName) => {
-    setOpenFilter(prev => (prev === filterName ? null : filterName));
+    setOpenFilters(prev =>
+      prev.includes(filterName)
+        ? prev.filter(name => name !== filterName)
+        : [...prev, filterName]
+    );
   };
 
   const dropdown = (label, filterName, options) => (
@@ -21,9 +25,10 @@ const FilterBar = ({ filters, setFilters, categoryCounts }) => {
         onClick={() => toggleOpen(filterName)}
       >
         {label}
-        <span className="dropdown-icon">{openFilter === filterName ? '–' : '+'}</span>
+        <span className="dropdown-icon">{openFilters.includes(filterName) ? '–' : '+'}</span>
       </button>
-      {openFilter === filterName && (
+      {/* {openFilter === filterName && ( */}
+      <div className={`dropdown-accordion${openFilters.includes(filterName) ? ' open' : ''}`}>
         <FilterDropdown
           options={options}
           selected={filters[filterName] || []}
@@ -32,8 +37,8 @@ const FilterBar = ({ filters, setFilters, categoryCounts }) => {
                 ...prev, 
                 [filterName]: Array.isArray(valueArray) ? valueArray : [] }))}
         />
-      )}
-    </div>
+      </div>
+    </div> 
   );
 
   // const categoriesWithCounts = cateogires.map(cat => {

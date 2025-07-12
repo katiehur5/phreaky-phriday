@@ -13,6 +13,7 @@ function Profile() {
   const [user, setUser] = useState(null);
   const currentUserId = localStorage.getItem('userId');
   const [likedItems, setLikedItems] = useState([]);
+  // const [likedItemObjects, setLikedItemObjects] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
 
@@ -36,6 +37,21 @@ function Profile() {
   useEffect(() => {
     fetchUser();
   }, [userId]);
+
+  // Fetch all items and filter for liked by current user
+  // useEffect(() => {
+  //   async function fetchLikedItems() {
+  //     if (!currentUserId) return;
+  //     try {
+  //       const res = await API.get('/api/items');
+  //       const liked = res.data.filter(item => item.likes.some(like => like.toString() === currentUserId));
+  //       setLikedItemObjects(liked);
+  //     } catch (err) {
+  //       console.error('Failed to fetch liked items', err);
+  //     }
+  //   }
+  //   fetchLikedItems();
+  // }, [currentUserId]);
 
   if (!user) return <p>Loading...</p>;
 
@@ -232,6 +248,21 @@ function Profile() {
           <p>Where your clothes at? ಠ_ಠ</p>
         )}
       </div>
+      {/* Liked Items Section */}
+      {/* <div className="liked-items-section">
+        <h2>Liked Items</h2>
+        {likedItemObjects.length > 0 ? (
+          <MasonryGrid 
+            items={likedItemObjects} 
+            onToggleAvailability={toggleAvailability} // No toggle for liked
+            onDelete={handleDelete} // No delete for liked
+            onLike={handleLike}
+            likedItems={likedItems}
+          />
+        ) : (
+          <p>So you're the picky type?</p>
+        )}
+      </div> */}
     </div>
     </div>
   );

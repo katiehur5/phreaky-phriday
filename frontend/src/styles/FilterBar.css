@@ -11,7 +11,7 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
   flex-direction: row;
 }
-
+ 
 .filter-dropdown-group {
   position: relative;
   max-width: 160px;
@@ -28,11 +28,24 @@
   padding: 0.4rem 1rem;
   font-size: 0.95rem;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: 0.4s;
 }
 
 .dropdown-header:hover {
   background-color: #f0e6ff;
+}
+
+.dropdown-accordion {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  padding-top: 0;
+  opacity: 0;
+}
+.dropdown-accordion.open {
+  max-height: 400px; /* or a value large enough for your content */
+  padding-top: 0.5rem;
+  opacity: 1;
 }
 
 .dropdown-icon {

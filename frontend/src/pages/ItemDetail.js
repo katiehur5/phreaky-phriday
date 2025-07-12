@@ -41,7 +41,7 @@ function ItemDetail() {
       <Navbar />
       <div className="item-detail-content">
         <div className="back-row">
-          <div onClick={() => navigate('/items')} className="back-btn">
+          <div onClick={() => navigate(-1)} className="back-btn">
             back
           </div>
         </div>
