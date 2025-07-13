@@ -70,7 +70,7 @@ function Register() {
   return (
     <div className="register-container">
       <form onSubmit={handleSubmit}>
-        <h1>Register</h1>
+        <h1>Sign up</h1>
         {error && <div className="error-message">{error}</div>}
         <input 
           type="text" 
@@ -113,7 +113,7 @@ function Register() {
           onChange={handleChange} 
           required 
         />
-        <button type="submit">Register</button>
+        <button type="submit">Sign up</button>
       </form>
     </div>
   );
