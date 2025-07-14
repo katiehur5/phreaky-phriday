@@ -13,7 +13,6 @@ const MasonryGrid = ({ items, onToggleAvailability, onDelete, onLike, likedItems
     600: 1
   };
   const userId = localStorage.getItem('userId');
-  const baseUrl = process.env.REACT_APP_API_URL || 'http://localhost:3000';
   const [showModal, setShowModal] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(null);
 

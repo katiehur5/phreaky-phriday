@@ -9,17 +9,20 @@
   text-align: center;
   font-family: 'Prata', serif;
   box-sizing: border-box;
+  /* background: linear-gradient(45deg, #0e1b33,#5faef8); */
 }
 
 .landing-title {
   font-size: 3rem;
   color: #333;
+  /* color: white; */
 }
 
 .landing-subtitle {
   font-size: 1.2rem;
   margin-bottom: 2rem;
   color: #666;
+  /* color: white; */
 }
 
 .button-group {

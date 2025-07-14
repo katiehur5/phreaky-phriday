@@ -33,27 +33,33 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/home" element={
           <PrivateRoute 
-            element={<Home />} />
+            element={<Home />}/>
         } />
         <Route path="/items" element={
           <PrivateRoute 
-            element={<Items />} />
+            element={<Items />}/>
         }/>
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={
+          <PrivateRoute 
+            element={<Register />}/>
+        } />
         <Route path="/enter" element={<EnterCloset />} />
-        <Route path="/welcome" element={<Welcome />} />
+        <Route path="/welcome" element={
+          <PrivateRoute 
+              element={<Welcome />}/>
+        }/>
         <Route path="/login" element={<Login />} />
         <Route path="/add-item" element={
           <PrivateRoute 
-            element={<AddItem />} />
+            element={<AddItem />}/>
         } />
         <Route path="/profile/:userId" element={
           <PrivateRoute 
-            element={<Profile />} />
+            element={<Profile />}/>
         } />
         <Route path="/items/:id/" element={
           <PrivateRoute 
-            element={<ItemDetail />} />
+            element={<ItemDetail />}/>
         }/>
       </Routes>
     </Router>
