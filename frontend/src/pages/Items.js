@@ -6,6 +6,7 @@ import MasonryGrid from '../components/MasonryGrid';
 import FilterBar from '../components/FilterBar';
 import { useNavigate } from 'react-router-dom';
 import LoadingAnimation from '../components/LoadingAnimation';
+import Footer from '../components/Footer';
 
 function Items() {
   const [items, setItems] = useState([]);
@@ -116,17 +117,18 @@ function Items() {
   return (
     <div className="items-wrapper">
       <Navbar />
-    <div className="items-container">
-      <h1>b r o w s e</h1>
-      <>
-      <FilterBar filters={filters} setFilters={setFilters}/>
-        {items.length === 0 ? (
-          <p>Nothing here yet! o ~ o</p>
-        ): (
-          <MasonryGrid items={items} onToggleAvailability={toggleAvailability} onDelete={handleDelete} onLike={handleLike} likedItems={likedItems}/>
-        )}
-      </>
-    </div>
+      <div className="items-container">
+        <h1>b r o w s e</h1>
+        <>
+        <FilterBar filters={filters} setFilters={setFilters}/>
+          {items.length === 0 ? (
+            <p>Nothing here yet! o ~ o</p>
+          ): (
+            <MasonryGrid items={items} onToggleAvailability={toggleAvailability} onDelete={handleDelete} onLike={handleLike} likedItems={likedItems}/>
+          )}
+        </>
+      </div>
+      <Footer />
     </div>
   );
 }

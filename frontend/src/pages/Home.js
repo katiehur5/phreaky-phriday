@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import '../styles/Home.css';
 import Navbar from '../components/Navbar';
 import MarqueeSection from '../components/MarqueeSection';
+import Footer from '../components/Footer';
 
 const Home = () => {
   const [offsetY, setOffsetY] = useState(0);
@@ -98,6 +99,7 @@ const Home = () => {
           <br></br>
           Katie Hur
       </section>
+      <Footer />
     </div>
 
     

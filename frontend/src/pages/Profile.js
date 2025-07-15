@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import API from '../api';
 import '../styles/Profile.css';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import MasonryGrid from '../components/MasonryGrid';
 import { useNavigate } from 'react-router-dom';
 import EditProfileForm from '../components/EditProfileForm';
@@ -261,22 +262,25 @@ function Profile() {
           <p>Where your clothes at? ಠ_ಠ</p>
         )}
       </div>
+    </div>
       {/* Liked Items Section */}
       <div className="liked-items-section">
-        <h2>Liked Items</h2>
-        {wishlist.length > 0 ? (
-          <MasonryGrid 
-            items={wishlist} 
-            onToggleAvailability={toggleAvailability} // No toggle for liked
-            onDelete={handleDelete} // No delete for liked
-            onLike={handleLike}
-            likedItems={wishlistIds}
-          />
-        ) : (
-          <p>So you're the picky type?</p>
-        )}
+        <div className="wishlist-container">
+          <h1>Wishlist</h1>
+          {wishlist.length > 0 ? (
+            <MasonryGrid 
+              items={wishlist} 
+              onToggleAvailability={toggleAvailability} // No toggle for liked
+              onDelete={handleDelete} // No delete for liked
+              onLike={handleLike}
+              likedItems={wishlistIds}
+            />
+          ) : (
+            <p>So you're the picky type?</p>
+          )}
+        </div>
       </div>
-    </div>
+      <Footer />
     </div>
   );
 }

@@ -6,7 +6,7 @@
   font-family: 'Prata', serif; /* or your main site font */
 }
 
-.profile-container h1 {
+.profile-container h1{
   font-size: 2.5rem;
   margin-bottom: 1rem;
   color: #333;
@@ -155,4 +155,24 @@
 }
 .edit-btn:hover {
   transform: scale(1.3);
+}
+
+.liked-items-section {
+  /* background: linear-gradient(45deg, #8A6B56, #D0B79A); */
+  background: #8A6B56;
+}
+
+.wishlist-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  font-family: 'Prata', serif;
+  color: white;
+  min-height: 20vh;
+}
+.wishlist-container h1{
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  align-self: center;
 }

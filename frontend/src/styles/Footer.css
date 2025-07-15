@@ -1,0 +1,35 @@
+.footer {
+    background-color: #FFF8E6;
+    position: relative;
+    /* margin-top: 6rem; */
+    /* padding: 2%; */
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    min-height: 25vh;
+    font-family: 'Prata', serif;
+    color: #707070;
+    text-align: center;
+    flex-direction: column;
+}
+
+.logo {
+    padding-bottom: 3rem;
+}
+
+.links {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+
+.links a:hover {
+    color: #3e3e3e;
+}
+
+.link-group {
+    text-align: start;
+}
