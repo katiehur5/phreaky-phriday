@@ -104,7 +104,7 @@ function AddItem() {
       });
 
       // alert('Item added successfully!');
-      navigate('/profile'); // Redirect to item listings
+      navigate(`/profile/${userId}`); // Redirect to item listings
     } catch (error) {
       console.error('Error adding item:', error);
       alert('Failed to add item.');

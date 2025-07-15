@@ -14,6 +14,7 @@
     color: #707070;
     text-align: center;
     flex-direction: column;
+    flex-wrap: wrap;
 }
 
 .logo {
@@ -25,7 +26,9 @@
     flex-direction: row;
     gap: 40px;
 }
-
+.links p {
+    font-family: 'Roboto', sans-serif;
+}
 .links a:hover {
     color: #3e3e3e;
 }
