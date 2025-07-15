@@ -76,10 +76,13 @@ button.pill {
   text-align: center;
 }
 
-.pill.selected,
-.pill.selected:hover,
-.pill.selected:focus,
-.pill.selected:active {
+.pill:hover {
+  background: linear-gradient(135deg, #f0e6ff, #f7e6ff) !important;
+}
+
+.pill.selected {
+/* .pill.selected:focus,
+.pill.selected:active { */
   background: linear-gradient(135deg, #ff758c, #ff7eb3) !important;
   /* border-color: #4c2a85 !important; */
   color: #444 !important;

@@ -12,13 +12,17 @@ import { AiFillInstagram } from "react-icons/ai";
 import { BiLogoVenmo } from "react-icons/bi";
 
 function Profile() {
-  const { userId } = useParams();
-  const [user, setUser] = useState(null);
-  const currentUserId = localStorage.getItem('userId');
-  const [likedItems, setLikedItems] = useState([]);
-  // const [likedItemObjects, setLikedItemObjects] = useState([]);
+  const { userId } = useParams(); // profile owner's id
+  const [user, setUser] = useState(null); // profile owner's object
+  const currentUserId = localStorage.getItem('userId'); // self
+  const [likedItems, setLikedItems] = useState([]); // ids of items liked and owned by user
   const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
+
+  // for displaying wishlist only if profile owner is self
+  const [wishlist, setWishlist] = useState([]); // list of item objects liked by self
+  const [wishlistIds, setWishlistIds] = useState([]);
+  const isOwner = currentUserId === userId.toString();
 
   async function fetchUser() {
     try {
@@ -28,7 +32,7 @@ function Profile() {
       // Set liked items based on the current user's likes
       if (currentUserId) {
         setLikedItems(res.data.items
-          .filter(item => item.likes.some(like => like.toString() === currentUserId))
+          .filter(item => item.likes.some(like => like.toString() === currentUserId)) // if liked by current user
           .map(item => item._id)
         );
       }
@@ -42,19 +46,21 @@ function Profile() {
   }, [userId]);
 
   // Fetch all items and filter for liked by current user
-  // useEffect(() => {
-  //   async function fetchLikedItems() {
-  //     if (!currentUserId) return;
-  //     try {
-  //       const res = await API.get('/api/items');
-  //       const liked = res.data.filter(item => item.likes.some(like => like.toString() === currentUserId));
-  //       setLikedItemObjects(liked);
-  //     } catch (err) {
-  //       console.error('Failed to fetch liked items', err);
-  //     }
-  //   }
-  //   fetchLikedItems();
-  // }, [currentUserId]);
+  async function fetchWishlist() {
+    if (!isOwner) return;
+    try {
+      const res = await API.get('/api/items');
+      const liked = res.data.filter(item => item.likes.some(like => like.toString() === currentUserId));
+      setWishlist(liked);
+      const likedIds = liked.map(item => item._id);
+      setWishlistIds(likedIds);
+    } catch (err) {
+      console.error('Failed to fetch liked items', err);
+    }
+  }
+  useEffect(() => {
+    fetchWishlist();
+  }, [currentUserId]);
 
   if (!user) return <p>Loading...</p>;
 
@@ -125,12 +131,19 @@ function Profile() {
           return [...prev, itemId];
         }
       });
+
+      // update wishlist
+      setWishlist(prev => {
+        return prev.filter(id => id !== itemId);
+      });
+      setWishlistIds(prev => {
+        return prev.filter(id => id !== itemId);
+      });
+      fetchWishlist();
     } catch (err) {
       console.error('Error liking item:', err);
     }
   };
-
-  const isOwner = currentUserId === userId.toString();
 
   return (
     <div className="profile-wrapper">
@@ -249,20 +262,20 @@ function Profile() {
         )}
       </div>
       {/* Liked Items Section */}
-      {/* <div className="liked-items-section">
+      <div className="liked-items-section">
         <h2>Liked Items</h2>
-        {likedItemObjects.length > 0 ? (
+        {wishlist.length > 0 ? (
           <MasonryGrid 
-            items={likedItemObjects} 
+            items={wishlist} 
             onToggleAvailability={toggleAvailability} // No toggle for liked
             onDelete={handleDelete} // No delete for liked
             onLike={handleLike}
-            likedItems={likedItems}
+            likedItems={wishlistIds}
           />
         ) : (
           <p>So you're the picky type?</p>
         )}
-      </div> */}
+      </div>
     </div>
     </div>
   );
