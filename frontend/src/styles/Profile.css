@@ -33,7 +33,7 @@
 }
 
 .profile-box {
-  background: white;
+  background-color: white;
   border-radius: 10px;
   align-items: center;
   text-align: start;
@@ -43,28 +43,33 @@
   gap: 5px;
   box-sizing: border-box;
   cursor: pointer;
-  transition: all 2s ease;
+  /* transition: all 2s ease; */
+  transition: background-color 0.5s ease-in-out;
   display: block;
 }
 
 .profile-pill {
   display: inline-block;
-  background-color: hsla(0, 0%, 53%, .133);
+  /* background-color: hsla(0, 0%, 53%, .133); */
+  background-image: linear-gradient(-45deg, #f5d6d6, #f5e5d6, #f5f5d6, #e5f5d6, #d6f5d6, #d6f5e5, #d6f0f5, #d6e5f5, #d6d6f5, #e5d6f5, #f5d6f5, #f5d6e5, #f5d6d6);
   border-radius: 4px;
-  padding: 5px;
-  margin: 0 5px 5px 0;
+  padding: 8px;
+  margin: 0 8px 8px 0;
+  align-items: center;
+  align-content: center;
+  vertical-align: middle;
 }
 /* .profile-pill:hover {
   background: linear-gradient(-45deg, #f5d6d6, #f5e5d6, #f5f5d6, #e5f5d6, #d6f5d6, #d6f5e5, #d6f0f5, #d6e5f5, #d6d6f5, #e5d6f5, #f5d6f5, #f5d6e5, #f5d6d6);
 } */
 .profile-pill.basic {
-  background-color: #c5f3e8;
+  background-attachment: fixed;
 }
 .profile-pill.social {
-  background-color: #fad0c4;
+  background-attachment: fixed;
 }
 .profile-pill.misc {
-  background: linear-gradient(-45deg, #f5d6d6, #f5e5d6, #f5f5d6, #e5f5d6, #d6f5d6, #d6f5e5, #d6f0f5, #d6e5f5, #d6d6f5, #e5d6f5, #f5d6f5, #f5d6e5, #f5d6d6);
+  background-attachment: fixed;
 }
 .profile-pill p {
   margin: 0;

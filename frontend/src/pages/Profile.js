@@ -6,7 +6,10 @@ import Navbar from '../components/Navbar';
 import MasonryGrid from '../components/MasonryGrid';
 import { useNavigate } from 'react-router-dom';
 import EditProfileForm from '../components/EditProfileForm';
-import { MdEdit } from "react-icons/md";
+import { MdEdit, MdAlternateEmail, MdLocalPhone, MdHome } from "react-icons/md";
+import { FaGraduationCap, FaSnapchat, FaPinterest } from "react-icons/fa";
+import { AiFillInstagram } from "react-icons/ai";
+import { BiLogoVenmo } from "react-icons/bi";
 
 function Profile() {
   const { userId } = useParams();
@@ -164,7 +167,8 @@ function Profile() {
             {/* <div className="profile-box"> */}
               
               <div className="profile-pill basic">
-                <p><strong>Email:</strong>{' '}
+                <p>
+                  <MdAlternateEmail />{' '}
                   <a className={`contact-link${user.email && user.email.includes('*') ? ' preferred-contact' : ''}`} href={`mailto:${user.email.replace("*","")}`}>
                       {user.email}
                   </a>
@@ -172,40 +176,53 @@ function Profile() {
               </div>
 
               <div className="profile-pill basic">
-                <p><strong>Digits:</strong>{' '}
+                <p>
+                  <MdLocalPhone />{' '}
                   <a className={`contact-link${user.phoneNumber && user.phoneNumber.includes('*') ? ' preferred-contact' : ''}`} href={`sms:${user.phoneNumber.replace("*","")}`}>
                     {user.phoneNumber}</a>
                 </p>
               </div>
               
-                {user.classYear && <div className="profile-pill basic"><p><strong>Class Year:</strong>{' '}
+                {user.classYear && <div className="profile-pill basic">
+                  <p>
+                  <FaGraduationCap />{' '}
                   {user.classYear}
                 </p></div>}
               
-                {user.residence && <div className="profile-pill basic"><p><strong>Addy:</strong>{' '}
+                {user.residence && <div className="profile-pill basic">
+                  <p>
+                    <MdHome />{' '}
                   {user.residence}
                 </p></div>}
         
-                {user.insta && <div className="profile-pill social"><p><strong>Insta: </strong>
+                {user.insta && <div className="profile-pill social">
+                  <p>
+                    <AiFillInstagram />{' '}
                   <a 
                     className={`contact-link${user.insta && user.insta.includes('*') ? ' preferred-contact' : ''}`} 
                     href={`https://www.instagram.com/${user.insta.replace(/[@*]/g,"")}`} target="_blank" rel="noreferrer">
                     {user.insta}</a>
                 </p></div>}
               
-                {user.snapchat && <div className="profile-pill social"><p><strong>Snap: </strong>
+                {user.snapchat && <div className="profile-pill social">
+                  <p>
+                    <FaSnapchat />{' '}
                   <a 
                     className={`contact-link${user.snapchat && user.snapchat.includes('*') ? ' preferred-contact' : ''}`} 
                     href={`https://www.snapchat.com/@${user.snapchat.replace(/[@*]/g,"")}`} target="_blank" rel="noreferrer">
                     {user.snapchat}</a>
                 </p></div>}
               
-                {user.pinterest && <div className="profile-pill social"><p><strong>Pinterest: </strong>
+                {user.pinterest && <div className="profile-pill social">
+                  <p>
+                    <FaPinterest />{' '}
                   <a className="contact-link" href={`https://www.pinterest.com/${user.pinterest.replace(/[@*]/g,"")}`} target="_blank" rel="noreferrer">
                     {user.pinterest}</a>
                 </p></div>}
               
-                {user.venmo && <div className="profile-pill social"><p><strong>Venmo:</strong>{' '}
+                {user.venmo && <div className="profile-pill social">
+                  <p>
+                    <BiLogoVenmo />{' '}
                   <a className="contact-link" href={`https://venmo.com/${user.venmo.replace(/[@*]/g,"")}`} target="_blank" rel="noreferrer">
                     {user.venmo}</a>
                 </p></div>}
