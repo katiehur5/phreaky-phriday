@@ -90,6 +90,7 @@ const Home = () => {
           />
         </div> */}
           <h3>about phreaky phriday</h3>
+          <p>
           A nonstop closet rotation among your closest friends, designed to collectivize closets, 
           <br></br>
           foster feminism, and reinforce reciprocity among women.
@@ -98,6 +99,7 @@ const Home = () => {
           with love,
           <br></br>
           Katie Hur
+          </p>
       </section>
       <Footer />
     </div>

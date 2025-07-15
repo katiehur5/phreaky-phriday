@@ -58,7 +58,7 @@ function EditProfileForm({ user, onSave, onCancel }) {
         },
       });
 
-      alert('User updated successfully!');
+      // alert('User updated successfully!');
       if (onSave) onSave();
     } catch (error) {
       console.error('Error updating user:', error);

@@ -78,7 +78,7 @@ function EditItemForm({ item, onSave, onCancel }) {
         },
       });
 
-      alert('Item updated successfully!');
+      // alert('Item updated successfully!');
       if (onSave) onSave();
     } catch (error) {
       console.error('Error updating item:', error);
