@@ -27,6 +27,7 @@ const Footer = () => {
                     <p>SUPPORT</p>
                     <p>FAQ</p>
                     <p>Feedback</p>
+                    <p>Feature requests</p>
                     <p>Status</p>
                     <p>Privacy</p>
                 </div>
