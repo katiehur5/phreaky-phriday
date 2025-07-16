@@ -66,8 +66,6 @@ function Profile() {
   if (!user) return <p>Loading...</p>;
 
   const handleDelete = async (itemId) => {
-    const confirmDelete = window.confirm("Are you sure you want to remove this item?");
-    if (!confirmDelete) return;
 
     try {
         const token = localStorage.getItem('token');
