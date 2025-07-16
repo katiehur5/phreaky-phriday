@@ -50,7 +50,7 @@
 
 .profile-pill {
   display: inline-block;
-  background-image: linear-gradient(-15deg, #f5d6d6, #f5e5d6, #f5f5d6, #e5f5d6, #d6f5d6, #d6f5e5, #d6f0f5, #d6e5f5, #d6d6f5, #e5d6f5, #f5d6f5, #f5d6e5, #f5d6d6);
+  background-image: linear-gradient(-15deg, #f5d6d6 0%, #f5e5d6, #f5f5d6, #e5f5d6, #d6f5d6, #d6f5e5, #d6f0f5, #d6e5f5, #d6d6f5, #e5d6f5, #f5d6f5, #f5d6e5, #f5d6d6 100%);
   border-radius: 4px;
   padding: 8px;
   margin: 0 8px 8px 0;
