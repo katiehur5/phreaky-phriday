@@ -180,7 +180,7 @@ function Profile() {
           <div className="profile-info">
             {/* <div className="profile-box"> */}
               
-              <div className="profile-pill basic">
+              <div className="profile-pill">
                 <p>
                   <MdAlternateEmail />{' '}
                   <a className={`contact-link${user.email && user.email.includes('*') ? ' preferred-contact' : ''}`} href={`mailto:${user.email.replace("*","")}`}>
@@ -189,7 +189,7 @@ function Profile() {
                 </p>
               </div>
 
-              <div className="profile-pill basic">
+              <div className="profile-pill">
                 <p>
                   <MdLocalPhone />{' '}
                   <a className={`contact-link${user.phoneNumber && user.phoneNumber.includes('*') ? ' preferred-contact' : ''}`} href={`sms:${user.phoneNumber.replace("*","")}`}>
@@ -197,19 +197,19 @@ function Profile() {
                 </p>
               </div>
               
-                {user.classYear && <div className="profile-pill basic">
+                {user.classYear && <div className="profile-pill ">
                   <p>
                   <FaGraduationCap />{' '}
                   {user.classYear}
                 </p></div>}
               
-                {user.residence && <div className="profile-pill basic">
+                {user.residence && <div className="profile-pill">
                   <p>
                     <MdHome />{' '}
                   {user.residence}
                 </p></div>}
         
-                {user.insta && <div className="profile-pill social">
+                {user.insta && <div className="profile-pill">
                   <p>
                     <AiFillInstagram />{' '}
                   <a 
@@ -218,7 +218,7 @@ function Profile() {
                     {user.insta}</a>
                 </p></div>}
               
-                {user.snapchat && <div className="profile-pill social">
+                {user.snapchat && <div className="profile-pill">
                   <p>
                     <FaSnapchat />{' '}
                   <a 
@@ -227,23 +227,23 @@ function Profile() {
                     {user.snapchat}</a>
                 </p></div>}
               
-                {user.pinterest && <div className="profile-pill social">
+                {user.pinterest && <div className="profile-pill">
                   <p>
                     <FaPinterest />{' '}
                   <a className="contact-link" href={`https://www.pinterest.com/${user.pinterest.replace(/[@*]/g,"")}`} target="_blank" rel="noreferrer">
                     {user.pinterest}</a>
                 </p></div>}
               
-                {user.venmo && <div className="profile-pill social">
+                {user.venmo && <div className="profile-pill">
                   <p>
                     <BiLogoVenmo />{' '}
                   <a className="contact-link" href={`https://venmo.com/${user.venmo.replace(/[@*]/g,"")}`} target="_blank" rel="noreferrer">
                     {user.venmo}</a>
                 </p></div>}
 
-                {user.style && <div className="profile-pill misc"><p><strong>Style: </strong>{user.style}</p></div>}
+                {user.style && <div className="profile-pill"><p><strong>Style: </strong>{user.style}</p></div>}
               
-                {user.influencer && <div className="profile-pill misc"><p><strong>Fav influencer: </strong>{user.influencer}</p></div>}
+                {user.influencer && <div className="profile-pill"><p><strong>Fav influencer: </strong>{user.influencer}</p></div>}
               
             {/* </div> */}
           </div>
@@ -264,6 +264,7 @@ function Profile() {
       </div>
     </div>
       {/* Liked Items Section */}
+      {isOwner && (
       <div className="liked-items-section">
         <div className="wishlist-container">
           <h1>Wishlist</h1>
@@ -279,7 +280,7 @@ function Profile() {
             <p>So you're the picky type?</p>
           )}
         </div>
-      </div>
+      </div>)}
       <Footer />
     </div>
   );
