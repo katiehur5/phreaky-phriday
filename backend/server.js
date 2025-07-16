@@ -55,6 +55,12 @@ app.use('/api/auth', authRoutes);
 // serve files from /uploads
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+// health
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'OK' });
+});
+
+
 app.get("/", (req, res) => res.send("API is running"));
 
 const PORT = process.env.PORT || 3000;
