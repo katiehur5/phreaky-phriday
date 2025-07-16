@@ -21,7 +21,7 @@ const Footer = () => {
                     <p>MORE PHREAKY</p>
                     <p>Rewards</p>
                     <p>Merch</p>
-                    <p>About Sustainability</p>
+                    <p>Sustainability</p>
                 </div>
                 <div className="link-group">
                     <p>SUPPORT</p>
