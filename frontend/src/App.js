@@ -39,15 +39,9 @@ function App() {
           <PrivateRoute 
             element={<Items />}/>
         }/>
-        <Route path="/register" element={
-          <PrivateRoute 
-            element={<Register />}/>
-        } />
+        <Route path="/register" element={<Register />}/>
         <Route path="/enter" element={<EnterCloset />} />
-        <Route path="/welcome" element={
-          <PrivateRoute 
-              element={<Welcome />}/>
-        }/>
+        <Route path="/welcome" element={<Welcome />}/>
         <Route path="/login" element={<Login />} />
         <Route path="/add-item" element={
           <PrivateRoute 
