@@ -26,8 +26,7 @@ const Footer = () => {
                 <div className="link-group">
                     <p>SUPPORT</p>
                     <p>FAQ</p>
-                    <p>Feedback</p>
-                    <p>Feature requests</p>
+                    <p><a href="https://phreaky-phriday.canny.io">Feedback</a></p>
                     <p>Status</p>
                     <p>Privacy</p>
                 </div>
