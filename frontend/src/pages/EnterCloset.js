@@ -12,6 +12,7 @@ function EnterCloset() {
     if (letters.join('').length === 4) {
       const word = letters.join('').toUpperCase();
       if (word === 'ORNO') {
+        localStorage.setItem('closetAccess', 'true');
         navigate('/welcome');
       } else {
         setError("Hint: Truth, Honor, Forever");

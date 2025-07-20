@@ -14,7 +14,7 @@ const Footer = () => {
                     <p>EXPLORE</p>
                     <p><a href="/items">Browse</a></p>
                     <p><a href="/add-item">Upload</a></p>
-                    <p>OOTDs</p>
+                    <p><a href="/events">Events</a></p>
                     <p><a href={`/profile/${userId}`}>Profile</a></p>
                 </div>
                 <div className="link-group">
@@ -22,6 +22,7 @@ const Footer = () => {
                     <p>Rewards</p>
                     <p>Merch</p>
                     <p>Sustainability</p>
+                    <p>Expectations</p>
                 </div>
                 <div className="link-group">
                     <p>SUPPORT</p>

@@ -14,6 +14,7 @@ import Profile from './pages/Profile';
 import ItemDetail from './pages/ItemDetail';
 import ScrollToTop from './components/ScrollToTop';
 import Welcome from './pages/Welcome';
+import Events from './pages/Events';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 
@@ -40,7 +41,13 @@ function App() {
           <PrivateRoute 
             element={<Items />}/>
         }/>
-        <Route path="/register" element={<Register />}/>
+        <Route path="/register" element={
+          localStorage.getItem('closetAccess') === 'true' ? (
+          <Register />
+          ) : (
+            <EnterCloset />
+          )
+        }/>
         <Route path="/enter" element={<EnterCloset />} />
         <Route path="/welcome" element={<Welcome />}/>
         <Route path="/login" element={<Login />} />
@@ -56,6 +63,10 @@ function App() {
           <PrivateRoute 
             element={<ItemDetail />}/>
         }/>
+        <Route path="/events" element={
+          <PrivateRoute 
+            element={<Events />}/>
+        } />
       </Routes>
     </Router>
 
