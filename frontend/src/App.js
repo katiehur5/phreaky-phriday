@@ -45,7 +45,7 @@ function App() {
           localStorage.getItem('closetAccess') === 'true' ? (
           <Register />
           ) : (
-            <EnterCloset />
+            <Register />
           )
         }/>
         <Route path="/enter" element={<EnterCloset />} />
