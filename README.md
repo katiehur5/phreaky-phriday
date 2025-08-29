@@ -15,6 +15,9 @@ A scalable digital “shared closet” platform empowering women’s communities
 * Access restrictions by chapter password and email verification
 * Event calendar
 
+## Browsing demo
+![download](https://github.com/user-attachments/assets/b9ff0207-9a7f-4b22-b1a9-041d5ac1d9a4)
+
 ## Architecture
 * Frontend: React.js
 * Backend: Express.js + Node.js
