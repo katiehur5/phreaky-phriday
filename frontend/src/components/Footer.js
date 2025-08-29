@@ -27,14 +27,14 @@ const Footer = () => {
                 <div className="link-group">
                     <p>SUPPORT</p>
                     <p>FAQ</p>
-                    <p><a href="https://phreaky-phriday.canny.io">Feedback</a></p>
-                    <p><a href="https://stats.uptimerobot.com/Z8jMWHwfi6">Status</a></p>
+                    <p><a href="https://phreaky-phriday.canny.io" target="_blank" rel="noreferrer">Feedback</a></p>
+                    <p><a href="https://stats.uptimerobot.com/Z8jMWHwfi6" target="_blank" rel="noreferrer">Status</a></p>
                     <p>Privacy</p>
                 </div>
                 <div className="link-group">
                     <p>ABOUT</p>
                     <p>Contact</p>
-                    <p><a href="https://github.com/katiehur5/phreaky-phriday">Github</a></p>
+                    <p><a href="https://github.com/katiehur5/phreaky-phriday" target="_blank" rel="noreferrer">Github</a></p>
                     <p>Visit Frills</p>
                     <p>Download app</p>
                 </div>
