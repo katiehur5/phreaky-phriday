@@ -34,7 +34,6 @@ function Login() {
 
       navigate('/home'); // Redirect to homepage after login
     } catch (error) {
-      console.error('Login failed:', error);
       if (error.response) {
         // Handle specific error messages from the backend
         const errorMessage = error.response.data.error;

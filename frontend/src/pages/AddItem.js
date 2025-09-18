@@ -15,6 +15,8 @@ function AddItem() {
     price: '',
   });
 
+  const [submitting, setSubmitting] = useState(false);
+
   const [imageFile, setImageFile] = useState(null);
   const [additionalImageFiles, setAdditionalImageFiles] = useState([]);
   const navigate = useNavigate();
@@ -60,6 +62,7 @@ function AddItem() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitting(true);
 
     const userId = localStorage.getItem('userId'); // Get logged-in user's ID
     const token = localStorage.getItem('token'); // Get token for authentication
@@ -103,7 +106,7 @@ function AddItem() {
         },
       });
 
-      // alert('Item added successfully!');
+      setSubmitting(false);
       navigate(`/profile/${userId}`); // Redirect to item listings
     } catch (error) {
       console.error('Error adding item:', error);
@@ -297,7 +300,9 @@ function AddItem() {
         )}
 
         {/* SUBMIT BUTTON */}
-        <button type="submit">upload to closet</button>
+        <button type="submit" disabled={submitting}>
+          {submitting ? "uploading..." : "upload to closet"}
+        </button>
       </form>
     </div>
     </div>

@@ -16,12 +16,11 @@ router.post('/', authenticate, upload.fields([
   { name: 'additionalImages', maxCount: 3 }
 ]), async (req, res) => {
   try {
-
     const { name, description, owner, isAvailable, category, subcategory, condition, size, swapType, washInstructions, price } = req.body;
-    // const mainImage = `uploads/${req.files['image']?.[0]?.filename}`;
-    // const additionalImages = (req.files['additionalImages'] || []).map(file => `uploads/${file.filename}`);
     const mainImage = req.files['image']?.[0]?.path;
     const additionalImages = (req.files['additionalImages'] || []).map(file => file.path);
+
+    console.log("Attempting item upload by:", owner);
 
     const item = new Item({ 
       name,
@@ -40,6 +39,7 @@ router.post('/', authenticate, upload.fields([
     });
 
     await item.save();
+    console.log("Item added by:", owner);
     res.status(201).json({ message: 'Item added successfully!', item });
   } catch (err) {
     console.error('Error adding item:', err);

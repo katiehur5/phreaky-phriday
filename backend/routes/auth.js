@@ -19,8 +19,9 @@ router.post('/register', async (req, res) => {
     const { name, phoneNumber, email, password, classYear } = req.body;
     const lowerEmail = email.toLowerCase();
 
+    console.log("Attempting registration with:", lowerEmail);
+
     // Enforce valid email
-    // const yaleEmailRegex = /^[a-zA-Z0-9._%+-]+@yale\.edu$/;
     const emailRegex = /^\S+@\S+\.\S+$/;
 
     if (!emailRegex.test(lowerEmail)) {
@@ -32,6 +33,7 @@ router.post('/register', async (req, res) => {
     // check for existing user
     const existingUser = await User.findOne({ email: lowerEmail });
     if (existingUser) {
+      console.log("Failed to register (already registered):", lowerEmail);
       return res.status(409).json({ error: 'Email already registered' });
     }
 
@@ -43,11 +45,10 @@ router.post('/register', async (req, res) => {
       classYear 
     });
 
-    // console.log('Attempting to save new user...');
     await newUser.save();
-    // console.log('User saved successfully');
 
     const token = generateToken(newUser);
+    console.log("Registered successfully:", lowerEmail);
     res.status(201).json({ 
       message: 'User registered successfully!', 
       user: newUser, 
@@ -75,7 +76,6 @@ router.post('/register', async (req, res) => {
 
 // **2. User Login**
 router.post('/login', async (req, res) => {
-  console.log('LOGIN ROUTE HIT');
   try {
     const { email, password } = req.body;
     const lowerEmail = email.toLowerCase();
@@ -83,25 +83,23 @@ router.post('/login', async (req, res) => {
     
     const user = await User.findOne({ email: lowerEmail });
 
-    // console.log("Found user:", user);
     if (user) {
       const match = await bcrypt.compare(password, user.password);
-      // console.log("Password match?", match);
     }
 
-    // if (!user || !(await bcrypt.compare(password, user.password))) {
-    //   return res.status(401).json({ error: 'Invalid credentials' });
-    // }
     if (!user) {
+      console.warn("Failed login (invalid email) from:", lowerEmail);
       return res.status(401).json({ error : 'Invalid email' });
     } else if (!(await bcrypt.compare(password, user.password))) {
+      console.warn("Failed login (invalid password) from:", lowerEmail);
       return res.status(401).json({ error : 'Invalid password' });
     }
 
     const token = generateToken(user);
+    console.log("Logged in successfully:", lowerEmail);
     res.json({ message: 'Login successful', user, token });
   } catch (err) {
-    console.error('Error logging in:', err);
+    console.log("Error logging in: ", err);
     res.status(500).json({ error: 'Error logging in' });
   }
 });
