@@ -63,7 +63,7 @@ const Home = () => {
         </div>
         <div className="polaroid-card">
           <img
-            src='/home_marquee/sparklers.jpg'
+            src='/home_marquee/curlinghair.jpg'
             alt="Upload prompt"
             className="polaroid-img"
           />
@@ -73,7 +73,7 @@ const Home = () => {
       <section className="home-container">
         <div className="polaroid-card">
           <img
-            src='/home_marquee/IMG_5998.JPG'
+            src='/home_marquee/sparklers.jpg'
             alt="Profile prompt"
             className="polaroid-img"
           />
