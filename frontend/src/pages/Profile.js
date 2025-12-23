@@ -51,7 +51,9 @@ function Profile() {
     if (!isOwner) return;
     try {
       const res = await API.get('/api/items');
-      const liked = res.data.filter(item => item.likes.some(like => like.toString() === currentUserId));
+      // Handle new response structure with items and allTags
+      const items = res.data.items && Array.isArray(res.data.items) ? res.data.items : res.data;
+      const liked = items.filter(item => item.likes.some(like => like.toString() === currentUserId));
       setWishlist(liked);
       const likedIds = liked.map(item => item._id);
       setWishlistIds(likedIds);

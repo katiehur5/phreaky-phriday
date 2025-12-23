@@ -7,7 +7,7 @@ const categories = ['clothing', 'shoes', 'accessories', 'home goods'];
 const subcategories = ['dress', 'top', 'bottom', 'outerwear'];
 const sizes = ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', '0', '2', '4', '6', '8', '10'];
 
-const FilterBar = ({ filters, setFilters, categoryCounts }) => {
+const FilterBar = ({ filters, setFilters, categoryCounts, allTags = [] }) => {
   const [openFilters, setOpenFilters] = useState([]);
 
   const toggleOpen = (filterName) => {
@@ -52,6 +52,7 @@ const FilterBar = ({ filters, setFilters, categoryCounts }) => {
       {dropdown('Category', 'category', categories)}
       {filters.category.includes('clothing') && dropdown('Clothing Type', 'subcategory', subcategories)}
       {dropdown('Size', 'size', sizes)}
+      {allTags.length > 0 && dropdown('Tags', 'tags', allTags)}
     </div>
   );
 };

@@ -16,11 +16,26 @@ router.post('/', authenticate, upload.fields([
   { name: 'additionalImages', maxCount: 3 }
 ]), async (req, res) => {
   try {
-    const { name, description, owner, isAvailable, category, subcategory, condition, size, swapType, washInstructions, price } = req.body;
+    const { name, description, owner, isAvailable, category, subcategory, condition, size, swapType, washInstructions, price, tags } = req.body;
     const mainImage = req.files['image']?.[0]?.path;
     const additionalImages = (req.files['additionalImages'] || []).map(file => file.path);
 
     console.log("Attempting item upload by:", owner);
+
+    // Parse tags if they come as a string (from FormData)
+    let parsedTags = [];
+    if (tags) {
+      if (typeof tags === 'string') {
+        try {
+          parsedTags = JSON.parse(tags);
+        } catch (e) {
+          // If not JSON, treat as comma-separated string
+          parsedTags = tags.split(',').map(t => t.trim()).filter(t => t);
+        }
+      } else if (Array.isArray(tags)) {
+        parsedTags = tags;
+      }
+    }
 
     const item = new Item({ 
       name,
@@ -36,6 +51,7 @@ router.post('/', authenticate, upload.fields([
       swapType,
       washInstructions,
       price,
+      tags: parsedTags,
     });
 
     await item.save();
@@ -73,7 +89,8 @@ router.get('/', authenticate, async (req, res) => {
       swapType,
       category,
       subcategory,
-      size
+      size,
+      tags
     } = req.query;
 
     const query = {};
@@ -81,6 +98,10 @@ router.get('/', authenticate, async (req, res) => {
     if (req.query.category) query.category = { $in: [].concat(req.query.category) };
     if (req.query.subcategory) query.subcategory = { $in: [].concat(req.query.subcategory) };
     if (req.query.size) query.size = { $in: [].concat(req.query.size) };
+    if (req.query.tags) {
+      const tagArray = [].concat(req.query.tags);
+      query.tags = { $in: tagArray };
+    }
 
     const items = await Item.find(query)
       .populate('owner', 'name email phoneNumber')  // populate owner details
@@ -90,7 +111,11 @@ router.get('/', authenticate, async (req, res) => {
     items.forEach(item => {
       item.likedByCurrentUser = item.likes.some(like => like.toString() === req.user.id)
     });
-    res.status(200).json(items);
+
+    // Get all unique tags from all items for filter options
+    const allTags = await Item.distinct('tags');
+    
+    res.status(200).json({ items, allTags: allTags.filter(t => t) });
   } catch (err) {
     console.error('Error retrieving items:', err);
     res.status(500).json({ error: 'Error retrieving items' });
@@ -174,6 +199,22 @@ router.put('/:id', authenticate, upload.fields([
         item[field] = req.body[field];
       }
     });
+
+    // Handle tags separately since they come as JSON string from FormData
+    if (req.body.tags !== undefined) {
+      let parsedTags = [];
+      if (typeof req.body.tags === 'string') {
+        try {
+          parsedTags = JSON.parse(req.body.tags);
+        } catch (e) {
+          // If not JSON, treat as comma-separated string
+          parsedTags = req.body.tags.split(',').map(t => t.trim()).filter(t => t);
+        }
+      } else if (Array.isArray(req.body.tags)) {
+        parsedTags = req.body.tags;
+      }
+      item.tags = parsedTags;
+    }
 
     // Handle images
     if (req.files['image']) {

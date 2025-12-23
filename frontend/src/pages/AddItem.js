@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import API from '../api';
 import { useNavigate } from 'react-router-dom';
 import '../styles/AddItem.css'; // Import styles
 import Navbar from '../components/Navbar';
+import CreatableSelect from 'react-select/creatable';
+
 
 function AddItem() {
   const [formData, setFormData] = useState({
@@ -15,11 +17,28 @@ function AddItem() {
     price: '',
   });
 
+  const [selectedTags, setSelectedTags] = useState([]);
+  const [existingTags, setExistingTags] = useState([]);
   const [submitting, setSubmitting] = useState(false);
 
   const [imageFile, setImageFile] = useState(null);
   const [additionalImageFiles, setAdditionalImageFiles] = useState([]);
   const navigate = useNavigate();
+
+  // Fetch existing tags on mount
+  useEffect(() => {
+    const fetchTags = async () => {
+      try {
+        const response = await API.get('/api/items');
+        if (response.data.allTags && Array.isArray(response.data.allTags)) {
+          setExistingTags(response.data.allTags);
+        }
+      } catch (error) {
+        console.error('Error fetching tags:', error);
+      }
+    };
+    fetchTags();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -98,6 +117,11 @@ function AddItem() {
         if (formData.price) { form.append('price', formData.price); }
       }
 
+      // Add tags to form data
+      if (selectedTags.length > 0) {
+        const tagValues = selectedTags.map(tag => tag.value || tag);
+        form.append('tags', JSON.stringify(tagValues));
+      }
 
       await API.post('/api/items', form, {
         headers: {
@@ -298,6 +322,39 @@ function AddItem() {
             // required
           />
         )}
+
+        {/* TAGS FIELD */}
+        <div className="tags-field">
+          <label className="field-label">TAGS:</label>
+          <CreatableSelect
+            isMulti
+            isClearable
+            isSearchable
+            placeholder="Add tags (e.g., Formal!, Halloween, HARVARD YALE MERCH)"
+            value={selectedTags}
+            onChange={(newValue) => setSelectedTags(newValue || [])}
+            options={existingTags.map(tag => ({ value: tag, label: tag }))}
+            createOptionPosition="first"
+            formatCreateLabel={(inputValue) => `Create "${inputValue}"`}
+            styles={{
+              control: (base) => ({
+                ...base,
+                backgroundColor: 'white',
+                border: '1px solid #ccc',
+                borderRadius: '4px',
+                minHeight: '38px',
+              }),
+              multiValue: (base) => ({
+                ...base,
+                backgroundColor: '#f0f0f0',
+              }),
+              multiValueLabel: (base) => ({
+                ...base,
+                color: '#333',
+              }),
+            }}
+          />
+        </div>
 
         {/* SUBMIT BUTTON */}
         <button type="submit" disabled={submitting}>

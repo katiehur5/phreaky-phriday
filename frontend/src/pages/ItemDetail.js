@@ -101,6 +101,22 @@ function ItemDetail() {
             {item.swapType === 'buy me' && item.price && (
               <p><strong>Price:</strong> ${item.price}</p>
             )}
+            {item.tags && item.tags.length > 0 && (
+              <div className="tags-container">
+                <p><strong>Tags:</strong></p>
+                <div className="tags-list">
+                  {item.tags.map((tag, index) => (
+                    <span
+                      key={index}
+                      className="tag-block"
+                      onClick={() => navigate(`/items?tags=${encodeURIComponent(tag)}`)}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
             <br></br>
             <p><strong>Owner:</strong>{' '}
               <a className="contact-link" href={`/profile/${item.owner?._id}`}>

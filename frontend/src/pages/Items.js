@@ -1,38 +1,72 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import API from '../api';
 import '../styles/Items.css';
 import Navbar from '../components/Navbar';
 import MasonryGrid from '../components/MasonryGrid';
 import FilterBar from '../components/FilterBar';
-import { useNavigate } from 'react-router-dom';
-import LoadingAnimation from '../components/LoadingAnimation';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+// import LoadingAnimation from '../components/LoadingAnimation';
 import Footer from '../components/Footer';
 
 function Items() {
   const [items, setItems] = useState([]);
+  const [allTags, setAllTags] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
   const [filters, setFilters] = useState({
     swapType: [],
     category: [],
     subcategory: [],
-    size: []
+    size: [],
+    tags: []
   });
   const [likedItems, setLikedItems] = useState([]);
   const navigate = useNavigate();
+  const isUpdatingFromUrl = useRef(false);
   // const [loading, setLoading] = useState(true);
 
-  const fetchItems = async() => {
+  // Initialize filters from URL params on mount and when URL changes
+  useEffect(() => {
+    isUpdatingFromUrl.current = true;
+    const initialFilters = {
+      swapType: searchParams.getAll('swapType') || [],
+      category: searchParams.getAll('category') || [],
+      subcategory: searchParams.getAll('subcategory') || [],
+      size: searchParams.getAll('size') || [],
+      tags: searchParams.getAll('tags') || []
+    };
+    setFilters(initialFilters);
+    // Fetch items immediately with URL params to avoid race condition
+    fetchItems(initialFilters);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams]);
+
+  const fetchItems = async(filterParams = null) => {
     // setLoading(true);
     try {
+        // Use provided filterParams or current filters state
+        const filtersToUse = filterParams || filters;
         const params = new URLSearchParams();
-        for (const key in filters) {
-          filters[key].forEach(value => {
+        for (const key in filtersToUse) {
+          filtersToUse[key].forEach(value => {
             if (value) params.append(key, value);
           });
         }
         const response = await API.get(`/api/items?${params.toString()}`);
-        setItems(response.data);
+        // Handle new response structure with items and allTags
+        let itemsData;
+        if (response.data.items && Array.isArray(response.data.items)) {
+          itemsData = response.data.items;
+          setItems(itemsData);
+          if (response.data.allTags) {
+            setAllTags(response.data.allTags);
+          }
+        } else {
+          // Fallback for backward compatibility
+          itemsData = response.data;
+          setItems(itemsData);
+        }
 
-        setLikedItems(response.data
+        setLikedItems(itemsData
           .filter(i => i.likedByCurrentUser)
           .map(i => i._id));
     } catch (error) {
@@ -41,7 +75,23 @@ function Items() {
   }
 
   useEffect(() => {
+    // Skip if we're updating from URL params to avoid infinite loop
+    if (isUpdatingFromUrl.current) {
+      isUpdatingFromUrl.current = false;
+      return;
+    }
+    
+    // Fetch items when filters change (from user interaction)
     fetchItems();
+    // Update URL params when filters change
+    const params = new URLSearchParams();
+    for (const key in filters) {
+      filters[key].forEach(value => {
+        if (value) params.append(key, value);
+      });
+    }
+    setSearchParams(params, { replace: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters]);
 
   
@@ -120,7 +170,7 @@ function Items() {
       <div className="items-container">
         <h1>b r o w s e</h1>
         <>
-        <FilterBar filters={filters} setFilters={setFilters}/>
+        <FilterBar filters={filters} setFilters={setFilters} allTags={allTags}/>
           {items.length === 0 ? (
             <p>Nothing here yet! o ~ o</p>
           ): (

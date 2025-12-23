@@ -212,3 +212,64 @@
 .back-btn:hover {
   color: #ff69b4;
 }
+
+/* Tags styling */
+.tags-container {
+  margin: 12px 0;
+}
+
+.tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.tag-block {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: linear-gradient(135deg,
+  #f5d6d6, #f5e5d6, #f5f5d6, #e5f5d6, #d6f5d6, #d6f5e5, #d6f0f5, #d6e5f5, #d6d6f5, #e5d6f5, #f5d6f5, #f5d6e5, #f5d6d6);
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease infinite;
+  color: #4a5d66;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
+}
+
+.tag-block:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.tag-block:active {
+  transform: translateY(0) scale(1);
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .tags-list {
+    gap: 6px;
+  }
+  
+  .tag-block {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+}
