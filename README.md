@@ -15,6 +15,7 @@ A scalable digital “shared closet” platform empowering women’s communities
 * Access restrictions by chapter password and email verification
 * Event calendar
 
+
 ## Browsing demo
 ![download](https://github.com/user-attachments/assets/b9ff0207-9a7f-4b22-b1a9-041d5ac1d9a4)
 
@@ -23,6 +24,10 @@ A scalable digital “shared closet” platform empowering women’s communities
 * Backend: Express.js + Node.js
 * Database: MongoDB Atlas
 * Hosting: Vercel (frontend) + Render (backend)
+
+## UI
+* Inspired by Indiana sunsets <3
+![download](https://github.com/user-attachments/assets/79f577a8-3a20-420f-a203-cc9dfacb7b4d)
 
 ## Scalability
 Scaled version, “[Frills](https://github.com/katiehur5/frills)”, designed to allow closet creation by any college sorority
