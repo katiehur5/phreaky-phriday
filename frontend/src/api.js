@@ -6,6 +6,8 @@ const API = axios.create({
   withCredentials: true,
 });
 
+console.log("API baseURL:", API.defaults.baseURL);
+
 // Add request interceptor
 API.interceptors.request.use(
   config => {
